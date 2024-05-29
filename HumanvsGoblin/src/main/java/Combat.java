@@ -32,7 +32,7 @@ public class Combat {
         window.getContentPane().add(goblinHPPanel);
         con.add(goblinHPPanel);
 
-        ImageIcon goblin = new ImageIcon("HumansvsGoblin\\src\\main\\java\\Images\\Goblin.webp");
+        ImageIcon goblin = new ImageIcon("HumanvsGoblin\\src\\main\\java\\assets\\pngtree-goblin-cartoon-png-image_4008070.jpeg");
         window.add(new JLabel(goblin));
         window.pack();
 
