@@ -7,7 +7,8 @@ public class Combat {
     JFrame window;
     Container con;
     JPanel titleNamePanel, goblinHPPanel,PlayerHPPanel;
-    JProgressBar GoblinHealthBar;
+    JProgressBar GoblinHealthBar, playerHealthBar;
+    JLabel playerHealthLabel;
     int playerH,goblinHP;
     public static void combatDisplay(){
         JFrame frame = new JFrame("Combat Screen");
@@ -28,24 +29,36 @@ public class Combat {
 
         goblinHPPanel = new JPanel();
         goblinHPPanel.setBounds(50,50,150,30);
-        goblinHPPanel.setBackground(Color.GREEN);
+        goblinHPPanel.setBackground(Color.BLACK);
         window.getContentPane().add(goblinHPPanel);
         con.add(goblinHPPanel);
-
-        ImageIcon goblin = new ImageIcon("HumanvsGoblin\\src\\main\\java\\assets\\pngtree-goblin-cartoon-png-image_4008070.jpeg");
-        window.add(new JLabel(goblin));
-        window.pack();
-
-        PlayerHPPanel = new JPanel();
-        PlayerHPPanel.setBounds(50,500,150,30);
-        PlayerHPPanel.setBackground(Color.BLUE);
-        con.add(PlayerHPPanel);
 
         GoblinHealthBar = new JProgressBar(0,100);
         GoblinHealthBar.setPreferredSize(new Dimension(150,30));
         GoblinHealthBar.setValue(50);
+        GoblinHealthBar.setBackground(Color.RED);
         goblinHPPanel.add(GoblinHealthBar);
+
+        ImageIcon goblin = new ImageIcon("HumanvsGoblin\\src\\main\\java\\assets\\pngtree-goblin-cartoon-png-image_4008070.jpeg");
+        window.add(new JLabel(goblin));
+        //window.pack();
+
+        PlayerHPPanel = new JPanel();
+        PlayerHPPanel.setBounds(50,500,150,30);
+        PlayerHPPanel.setBackground(Color.BLACK);
+        con.add(PlayerHPPanel);
+
+        playerHealthBar = new JProgressBar(0,100);
+        playerHealthBar.setPreferredSize(new Dimension(150,30));
+        playerHealthBar.setValue(75);
+        PlayerHPPanel.add(playerHealthBar);
+
+        playerHealthLabel = new JLabel();
+        playerHealthLabel.setPreferredSize(new Dimension(150,30));
+        playerHealthLabel.setText("Player Health");
+        PlayerHPPanel.add(playerHealthLabel);
         window.setVisible(true);
+
     }
     //public void Display();
     public static void main(String[] args){
