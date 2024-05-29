@@ -32,7 +32,7 @@ public class Combat {
         window.getContentPane().add(goblinHPPanel);
         con.add(goblinHPPanel);
 
-        ImageIcon goblin = new ImageIcon("C:\\Users\\Tman4\\OneDrive\\Pictures\\gobby.jpg");
+        ImageIcon goblin = new ImageIcon("HumansvsGoblin\\src\\main\\java\\Images\\Goblin.webp");
         window.add(new JLabel(goblin));
         window.pack();
 
@@ -45,22 +45,13 @@ public class Combat {
         GoblinHealthBar.setPreferredSize(new Dimension(150,30));
         GoblinHealthBar.setValue(50);
         goblinHPPanel.add(GoblinHealthBar);
-
         window.setVisible(true);
     }
     //public void Display();
     public static void main(String[] args){
         //combatDisplay();
         //CD1();
-        //new Combat();
-        JFrame frame = new JFrame("My first JFrame");
-        frame.setSize(600, 600);  
-        JLabel label = new JLabel();
-        label.setIcon(new ImageIcon(new ImageIcon("C:\\Users\\Tman4\\OneDrive\\Pictures\\Goblin.webp").getImage().getScaledInstance(300, 300, Image.SCALE_SMOOTH)));
-        frame.add(label);
-        frame.pack();
-        frame.setVisible(true);  
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); 
+        new Combat();
     }
 
 }
