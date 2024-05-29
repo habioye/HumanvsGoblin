@@ -42,14 +42,15 @@ public class Inventory extends JPanel implements ActionListener{
         
         graphics.setColor((Color.white));
         graphics.setFont(new Font("Sans serif", Font.ROMAN_BASELINE, 30));
-        FontMetrics metrics = getFontMetrics(graphics.getFont());
         graphics.drawString("Player Stats",0 ,graphics.getFont().getSize());
         
         
-        graphics.drawString("Attack: ", 0, graphics.getFont().getSize()*2);
-        graphics.drawString("Attack: ", 0, graphics.getFont().getSize()*3);
-        graphics.drawString("Attack: ", 0, graphics.getFont().getSize()*4);
-        graphics.drawString("Attack: ", 0, graphics.getFont().getSize()*5);
+        graphics.drawString("Attack: "+ 12, 0, graphics.getFont().getSize()*2);
+        graphics.drawString("Defense: "+-12, 0, graphics.getFont().getSize()*3);
+        
+
+        
+
         
     }
 
@@ -59,26 +60,26 @@ public class Inventory extends JPanel implements ActionListener{
         
         
     }
-
+    
     private class MyKeyAdapter extends KeyAdapter {
         @Override
         public void keyPressed(KeyEvent e) {
-            // Handle key pressed events
-            // switch (e.getKeyCode()) {
-            //     case KeyEvent.VK_LEFT:
-            //         // Move left
-            //         break;
-            //     case KeyEvent.VK_RIGHT:
-            //         // Move right
-            //         break;
-            //     case KeyEvent.VK_UP:
-            //         // Move up
-            //         break;
-            //     case KeyEvent.VK_DOWN:
-            //         // Move down
-            //         break;
-            //     // Add more key events as needed
-            // }
+            //Handle key pressed events
+            switch (e.getKeyCode()) {
+                case KeyEvent.VK_LEFT:
+                    // Move left
+                    break;
+                case KeyEvent.VK_RIGHT:
+                    // Move right
+                    break;
+                case KeyEvent.VK_UP:
+                    // Move up
+                    break;
+                case KeyEvent.VK_DOWN:
+                    // Move down
+                    break;
+                // Add more key events as needed
+            }
         }
     }
 }
