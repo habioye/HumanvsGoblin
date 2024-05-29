@@ -22,6 +22,7 @@ public class Inventory extends JPanel implements ActionListener{
         this.addKeyListener(new MyKeyAdapter());
         play();
     }
+
     @Override
 	public void paintComponent(Graphics graphics) {
 		super.paintComponent(graphics);
@@ -38,6 +39,17 @@ public class Inventory extends JPanel implements ActionListener{
     public void drawInventory(Graphics graphics){
         graphics.setColor(Color.GRAY);
         graphics.fillRect(0, 0, WIDTH/2/2, HEIGHT/2);
+        
+        graphics.setColor((Color.white));
+        graphics.setFont(new Font("Sans serif", Font.ROMAN_BASELINE, 30));
+        FontMetrics metrics = getFontMetrics(graphics.getFont());
+        graphics.drawString("Player Stats",0 ,graphics.getFont().getSize());
+        
+        
+        graphics.drawString("Attack: ", 0, graphics.getFont().getSize()*2);
+        graphics.drawString("Attack: ", 0, graphics.getFont().getSize()*3);
+        graphics.drawString("Attack: ", 0, graphics.getFont().getSize()*4);
+        graphics.drawString("Attack: ", 0, graphics.getFont().getSize()*5);
         
     }
 
