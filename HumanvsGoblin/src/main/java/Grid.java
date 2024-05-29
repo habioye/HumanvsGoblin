@@ -5,7 +5,7 @@ public class Grid extends JPanel {
     int gridsize;
     int units;
     public Grid(int gridsize, int units) {
-        setSize(500,500);
+        setSize(900,900);
         setVisible(true);
         this.gridsize = gridsize;
         this.units = units;
