@@ -11,8 +11,8 @@ public class Combat {
     JPanel titleNamePanel, goblinHPPanel,PlayerHPPanel, goblinPanel, fightPanel, invetoryPanel, inspectPanel;
     JProgressBar GoblinHealthBar, playerHealthBar;
     JLabel playerHealthLabel, goblinLabel, humanLabel;
-    JButton fightButton, invetoryButton, inspectButton;
-    int playerH,goblinHP;
+    JButton fightButton, inventoryButton, inspectButton;
+    int goblinHP = 20;
     public static void combatDisplay(){
         JFrame frame = new JFrame("Combat Screen");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -36,19 +36,19 @@ public class Combat {
         window.getContentPane().add(goblinHPPanel);
         con.add(goblinHPPanel);
 
-        GoblinHealthBar = new JProgressBar(0,100);
+        GoblinHealthBar = new JProgressBar(0,20);
         GoblinHealthBar.setPreferredSize(new Dimension(150,30));
         //Set HP goblin value
-        GoblinHealthBar.setValue(50);
+        GoblinHealthBar.setValue(goblinHP);
         GoblinHealthBar.setBackground(Color.RED);
         GoblinHealthBar.setStringPainted(true);
         GoblinHealthBar.setString("Goblin HP: "+GoblinHealthBar.getValue());
         goblinHPPanel.add(GoblinHealthBar);
 
         ImageIcon goblin = new ImageIcon("HumanvsGoblin/src/main/java/assets/pngtree-goblin-cartoon-png-image_4008070.jpeg","Goblin image");
-        goblin.setImage(goblin.getImage());
+        goblin.getImage();
+
         goblinLabel = new JLabel(goblin);
-        //goblinPanel = new JPanel();
         window.add(goblinLabel);
 
         ImageIcon human = new ImageIcon("C:/Users/Tman4/OneDrive/Documents/Java Training/HumanvsGoblin/HumanvsGoblin/src/main/java/assets/human.jpeg");
@@ -61,9 +61,9 @@ public class Combat {
         PlayerHPPanel.setBackground(Color.BLACK);
         window.add(PlayerHPPanel);
 
-        playerHealthBar = new JProgressBar(0,100);
+        playerHealthBar = new JProgressBar(0,30);
         playerHealthBar.setPreferredSize(new Dimension(150,30));
-        playerHealthBar.setValue(50);
+        playerHealthBar.setValue(Player.HP);
         playerHealthBar.setStringPainted(true);
         playerHealthBar.setString("Player HP: "+playerHealthBar.getValue());
         PlayerHPPanel.add(playerHealthBar);
@@ -85,14 +85,14 @@ public class Combat {
         fightPanel.add(fightButton);
         window.add(fightPanel);
         
-        invetoryButton = new JButton("Inventory");
-        invetoryButton.setBackground(Color.black);
-        invetoryButton.setForeground(Color.WHITE);
-        invetoryButton.setFocusPainted(false);
+        inventoryButton = new JButton("Inventory");
+        inventoryButton.setBackground(Color.black);
+        inventoryButton.setForeground(Color.WHITE);
+        inventoryButton.setFocusPainted(false);
         invetoryPanel = new JPanel();
         invetoryPanel.setBounds(100, 475,150,30);
         invetoryPanel.setBackground(Color.black);
-        invetoryPanel.add(invetoryButton);
+        invetoryPanel.add(inventoryButton);
         window.add(invetoryPanel);
 
 
@@ -107,10 +107,17 @@ public class Combat {
         window.add(inspectPanel);
 
     }
+    public static void attack(){
+        Player.attackDamage = Player.attack-Goblin.def;
+        System.out.println("Goblin took: "+Player.attackDamage+" damage");
+
+        
+    }
     //public void Display();
     public static void main(String[] args){
         //combatDisplay();
         //CD1();
+        attack();
         new Combat();
     }
 
