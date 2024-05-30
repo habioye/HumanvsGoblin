@@ -6,9 +6,9 @@ public class Combat {
     static JLabel l;
     JFrame window;
     Container con;
-    JPanel titleNamePanel, goblinHPPanel,PlayerHPPanel;
+    JPanel titleNamePanel, goblinHPPanel,PlayerHPPanel, goblinPanel;
     JProgressBar GoblinHealthBar, playerHealthBar;
-    JLabel playerHealthLabel;
+    JLabel playerHealthLabel, goblinLabel;
     int playerH,goblinHP;
     public static void combatDisplay(){
         JFrame frame = new JFrame("Combat Screen");
@@ -37,10 +37,15 @@ public class Combat {
         GoblinHealthBar.setPreferredSize(new Dimension(150,30));
         GoblinHealthBar.setValue(50);
         GoblinHealthBar.setBackground(Color.RED);
+        GoblinHealthBar.setStringPainted(true);
+        GoblinHealthBar.setString("Goblin HP: "+GoblinHealthBar.getValue());
         goblinHPPanel.add(GoblinHealthBar);
 
-        ImageIcon goblin = new ImageIcon("HumanvsGoblin\\src\\main\\java\\assets\\pngtree-goblin-cartoon-png-image_4008070.jpeg");
-        window.add(new JLabel(goblin));
+        ImageIcon goblin = new ImageIcon("HumanvsGoblin/src/main/java/assets/pngtree-goblin-cartoon-png-image_4008070.jpeg","Goblin image");
+        goblinLabel = new JLabel(goblin);
+        //goblinPanel = new JPanel();
+        goblin.setImage(goblin.getImage());
+        window.add(goblinLabel);
         //window.pack();
 
         PlayerHPPanel = new JPanel();
@@ -50,12 +55,15 @@ public class Combat {
 
         playerHealthBar = new JProgressBar(0,100);
         playerHealthBar.setPreferredSize(new Dimension(150,30));
-        playerHealthBar.setValue(75);
+        playerHealthBar.setValue(50);
+        playerHealthBar.setStringPainted(true);
+        playerHealthBar.setString("Player HP: "+playerHealthBar.getValue());
         PlayerHPPanel.add(playerHealthBar);
 
         playerHealthLabel = new JLabel();
         playerHealthLabel.setPreferredSize(new Dimension(150,30));
         playerHealthLabel.setText("Player Health");
+        playerHealthLabel.getText();
         PlayerHPPanel.add(playerHealthLabel);
         window.setVisible(true);
 
