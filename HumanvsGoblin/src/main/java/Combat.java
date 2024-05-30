@@ -1,4 +1,6 @@
 import java.awt.*;
+import java.awt.image.CropImageFilter;
+
 import javax.swing.*;
 
 public class Combat {
@@ -6,9 +8,10 @@ public class Combat {
     static JLabel l;
     JFrame window;
     Container con;
-    JPanel titleNamePanel, goblinHPPanel,PlayerHPPanel, goblinPanel;
+    JPanel titleNamePanel, goblinHPPanel,PlayerHPPanel, goblinPanel, fightPanel, invetoryPanel, inspectPanel;
     JProgressBar GoblinHealthBar, playerHealthBar;
-    JLabel playerHealthLabel, goblinLabel;
+    JLabel playerHealthLabel, goblinLabel, humanLabel;
+    JButton fightButton, invetoryButton, inspectButton;
     int playerH,goblinHP;
     public static void combatDisplay(){
         JFrame frame = new JFrame("Combat Screen");
@@ -35,6 +38,7 @@ public class Combat {
 
         GoblinHealthBar = new JProgressBar(0,100);
         GoblinHealthBar.setPreferredSize(new Dimension(150,30));
+        //Set HP goblin value
         GoblinHealthBar.setValue(50);
         GoblinHealthBar.setBackground(Color.RED);
         GoblinHealthBar.setStringPainted(true);
@@ -42,16 +46,20 @@ public class Combat {
         goblinHPPanel.add(GoblinHealthBar);
 
         ImageIcon goblin = new ImageIcon("HumanvsGoblin/src/main/java/assets/pngtree-goblin-cartoon-png-image_4008070.jpeg","Goblin image");
+        goblin.setImage(goblin.getImage());
         goblinLabel = new JLabel(goblin);
         //goblinPanel = new JPanel();
-        goblin.setImage(goblin.getImage());
         window.add(goblinLabel);
-        //window.pack();
+
+        ImageIcon human = new ImageIcon("C:/Users/Tman4/OneDrive/Documents/Java Training/HumanvsGoblin/HumanvsGoblin/src/main/java/assets/human.jpeg");
+        human.setImage(human.getImage());
+        humanLabel = new JLabel(human);
+        window.add(humanLabel);
 
         PlayerHPPanel = new JPanel();
         PlayerHPPanel.setBounds(50,500,150,30);
         PlayerHPPanel.setBackground(Color.BLACK);
-        con.add(PlayerHPPanel);
+        window.add(PlayerHPPanel);
 
         playerHealthBar = new JProgressBar(0,100);
         playerHealthBar.setPreferredSize(new Dimension(150,30));
@@ -66,6 +74,37 @@ public class Combat {
         playerHealthLabel.getText();
         PlayerHPPanel.add(playerHealthLabel);
         window.setVisible(true);
+
+        fightButton = new JButton("Fight");
+        fightButton.setBackground(Color.black);
+        fightButton.setForeground(Color.WHITE);
+        fightButton.setFocusPainted(false);
+        fightPanel = new JPanel();
+        fightPanel.setBounds(100,450,150,30);
+        fightPanel.setBackground(Color.black);
+        fightPanel.add(fightButton);
+        window.add(fightPanel);
+        
+        invetoryButton = new JButton("Inventory");
+        invetoryButton.setBackground(Color.black);
+        invetoryButton.setForeground(Color.WHITE);
+        invetoryButton.setFocusPainted(false);
+        invetoryPanel = new JPanel();
+        invetoryPanel.setBounds(100, 475,150,30);
+        invetoryPanel.setBackground(Color.black);
+        invetoryPanel.add(invetoryButton);
+        window.add(invetoryPanel);
+
+
+        inspectButton = new JButton("Inspect");
+        inspectButton.setBackground(Color.black);
+        inspectButton.setForeground(Color.WHITE);
+        inspectButton.setFocusPainted(false);
+        inspectPanel = new JPanel();
+        inspectPanel.setBounds(200,450,150,30);
+        inspectPanel.setBackground(Color.black);
+        inspectPanel.add(inspectButton);
+        window.add(inspectPanel);
 
     }
     //public void Display();
