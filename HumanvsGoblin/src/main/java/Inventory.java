@@ -26,7 +26,8 @@ public class Inventory extends JPanel implements ActionListener{
     @Override
 	public void paintComponent(Graphics graphics) {
 		super.paintComponent(graphics);
-		drawInventory(graphics);
+        Graphics2D graphics2d = (Graphics2D) graphics;
+		drawInventory(graphics2d);
 	}
     public void play(){
         running = true;
@@ -36,20 +37,31 @@ public class Inventory extends JPanel implements ActionListener{
         
     }
 
-    public void drawInventory(Graphics graphics){
-        graphics.setColor(Color.GRAY);
-        graphics.fillRect(0, 0, WIDTH/2/2, HEIGHT/2);
+    public void drawInventory(Graphics2D graphics2d){
+        graphics2d.setColor(new Color(0,0,0));
+        graphics2d.fillRect(0, 0, WIDTH/2, HEIGHT/2);
+
+        graphics2d.setColor(new Color(255,255,255));
+        graphics2d.setStroke(new BasicStroke(5));
+        graphics2d.drawRoundRect(WIDTH/2/2+5, 5, WIDTH/2/2 -10, HEIGHT/2 -10,25,25);
+
+        graphics2d.setColor(new Color(255,255,255));
+        graphics2d.setStroke(new BasicStroke(5));
+        graphics2d.drawRoundRect(5, 5, WIDTH/2/2 -10, HEIGHT/2 -10,25,25);
         
-        graphics.setColor((Color.white));
-        graphics.setFont(new Font("Sans serif", Font.ROMAN_BASELINE, 30));
-        graphics.drawString("Player Stats",0 ,graphics.getFont().getSize());
+        graphics2d.setColor((Color.white));
+        graphics2d.setFont(new Font("Sans serif", Font.ROMAN_BASELINE, 20));
+        graphics2d.drawString("Player Stats",10 ,graphics2d.getFont().getSize()+10);
         
         
-        graphics.drawString("Attack: "+ 12, 0, graphics.getFont().getSize()*2);
-        graphics.drawString("Defense: "+-12, 0, graphics.getFont().getSize()*3);
+        
+        graphics2d.drawString("Attack: "+ 12, 10, graphics2d.getFont().getSize()*2+10);
+        graphics2d.drawString("Defense: "+-12, 10, graphics2d.getFont().getSize()*3+10);
         
 
-        
+        // graphics2d.setColor((Color.white));
+        // graphics2d.setFont(new Font("Sans serif", Font.ROMAN_BASELINE, 20));
+        // graphics2d.drawString("Inventory",WIDTH/2/2+5+8 ,graphics2d.getFont().getSize()+5);
 
         
     }
