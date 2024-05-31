@@ -31,10 +31,10 @@ public class Inventory extends JPanel implements ActionListener{
         
         
         backpack.add(new sword());
-        // backpack.add(new sword());
-        // backpack.add(new Gold());
-        // backpack.add(new sword());
-        // backpack.add(new Gold());
+        backpack.add(new sword());
+        backpack.add(new Gold());
+        backpack.add(new sword());
+        backpack.add(new Gold());
         
         HumanvsGoblin.human.setWeapon(0);
         play();
@@ -69,7 +69,7 @@ public class Inventory extends JPanel implements ActionListener{
         graphics2d.setColor(Color.RED);
         for(int i = 0; i < backpack.size();i++){
             if(backpack.get(i).getItemId().equals(Item.ItemID.SWORD)){
-                //graphics2d.drawImage(backpack.get(i).image,slotX, slotY,35,35,null);
+                graphics2d.drawImage(backpack.get(i).image,slotX, slotY,35,35,null);
 
             }else{
                 graphics2d.setColor(Color.YELLOW);

@@ -226,5 +226,5 @@ public class HumanvsGoblin {
         //     humanT = !humanT;
         // }
     }
-
+    }
 }

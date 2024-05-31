@@ -1,9 +1,10 @@
-
+import java.awt.*;
 import java.io.File;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 
 public class sword extends Item{
+    
     public sword(){
         attack = 15;
 		name = "Sword";
@@ -12,7 +13,7 @@ public class sword extends Item{
         image = new ImageIcon("assets/sword.png").getImage();          
         
     }
-    public ImageIcon getImage(){
-        return image;
+    public Image getImage(){
+        return this.image;
     }
 }

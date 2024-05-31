@@ -1,12 +1,11 @@
-import java.awt.image.BufferedImage;
-import java.awt.image.ImagingOpException;
+import java.awt.*;
 import java.io.File;
 
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 
 public class Gold extends Item {
-
+	
 
 	public Gold() {
 		name = "Gold";
@@ -21,7 +20,7 @@ public class Gold extends Item {
         }
 	}
 
-	public ImageIcon getImage(){
+	public Image getImage(){
 		return image;
 	}
 }
