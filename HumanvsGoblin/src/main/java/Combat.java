@@ -14,8 +14,6 @@ public class Combat {
     JProgressBar GoblinHealthBar, playerHealthBar;
     JLabel playerHealthLabel, goblinLabel, humanLabel;
     JButton fightButton, inventoryButton, inspectButton;
-    static Goblin enemy;
-    static Player player;
 
     static Goblin gobby = new Goblin();
     static Player human = new Player();
