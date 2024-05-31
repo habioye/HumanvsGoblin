@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.lang.Thread;
-
+import java.util.*;
 
 //package PlayerAsset;
 
@@ -14,9 +14,20 @@ public class HumanvsGoblin {
         return (40+(p*40));
     }
 
+
     public static void main(String[] args) {
-        String humanPath = "assets/human.png";
-        String goblinPath = "assets/goblin.png";
+//        String humanPath = "assets/human.png";
+        String humanPath = "assets/knight.png";
+        String goblinPath = "assets/goblin.gif";
+
+        // terrain
+        String grassPath = "assets/grass.png";
+
+        // Obstacle
+        String stonePath = "assets/stone.png";
+        String fireHydrantPath = "assets/firehydrant.jpeg";
+        String cratePath = "assets/crate.jpeg";
+
 
         int humanx = 0;
         int humany = 0;
@@ -31,7 +42,7 @@ public class HumanvsGoblin {
         players.add(humanPlayer);
         players.add(goblinPlayer);
 
-        PlayerPanel playerPanel = new PlayerPanel(players);
+//        PlayerPanel playerPanel = new PlayerPanel(players);
 
 
 
@@ -49,11 +60,11 @@ public class HumanvsGoblin {
         int cellSize = 40;
         int unitLength = 20;
 
-        Grid grid =  new Grid(cellSize,unitLength);
+        Grid grid =  new Grid(cellSize,unitLength,players, grassPath);
 
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         window.add(grid);
-        window.add(playerPanel);
+//        window.add(playerPanel);
 //        window.add(goblinAsset);
 
         grid.setFocusable(true);
@@ -89,12 +100,27 @@ public class HumanvsGoblin {
         Player goblin = new Player();
 
         boolean ch = false;
+//        Thread frame = new Thread(()-> {
+//            try {
+//                while (true) {
+//                    window.repaint();
+//                    Thread.sleep(100);
+//                }
+//            } catch(Exception e) {
+//                System.out.println(e);
+//            }
+//        }
+//
+//        );
+//        frame.start();
+                    int goblinWait = 200;
+                    int humanWait = 200;
         while (true) {
             ch = false;
             if (humanT) {
                 try {
 
-                    Thread.sleep(100);
+                    Thread.sleep(humanWait);
                 } catch (Exception e) {
                     System.out.println(e);
                 }
@@ -130,7 +156,6 @@ public class HumanvsGoblin {
 
             } else {
                 System.out.println("goblin");
-                    int goblinWait = 200;
                 try {
 
                     Thread.sleep(goblinWait);
@@ -173,9 +198,13 @@ public class HumanvsGoblin {
             humanPlayer.y = playerpos(humany);
             goblinPlayer.x = playerpos(goblinx);
             goblinPlayer.y = playerpos(gobliny);
-            window.repaint();
+//            playerPanel.repaint();
 //            grid.repaint();
 
+//            window.repaint();
+//            window.add(grid);
+//            window.add(playerPanel);
+            grid.repaint();
 
             humanT = !humanT;
         }
