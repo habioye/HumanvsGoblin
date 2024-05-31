@@ -1,4 +1,3 @@
-import javax.swing.*;
 public class Player {
     public int currentHP;
     public static int maxHP;
@@ -46,5 +45,13 @@ public class Player {
     public String inspect(){
         return "Player:  "+"\nHP: "+currentHP+" / "+maxHP+"\n Attack: "+attack+" - " + (attack+1)+"\nDefense: "+def+" - "+(def+1);
     }
+
+    public int getWeapon(){
+        return this.currWeapon;
+    }
+    public void setWeapon(int currWeapon){
+        this.currWeapon = currWeapon;
+    }
+
 
 }
