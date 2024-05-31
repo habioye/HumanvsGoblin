@@ -1,3 +1,4 @@
+
 public class Item {
 	public enum ItemID {
 		GOLD, SWORD
@@ -8,13 +9,33 @@ public class Item {
 	private double hit_rate;
 	private String name;
 	private ItemID itemId;
+	private boolean equiped = true;
 
 	public Item() {
+		this.hp = 0;
+		this.attack = 0;
+		this.hit_rate = 0;
+		this.name = "";
+		this.itemId = ItemID.SWORD;
+		this.equiped = false;
+	}
+	public Item(int attack, String name, ItemID itemID){
+		this.hp = 0;
+		this.attack = attack;
+		this.hit_rate = 0;
+		this.name = name;
+		this.itemId = itemID;
+		this.equiped = false;
 
 	}
-
+	public void setEquiped(boolean equiped){
+		this.equiped = true;
+	}
+	public boolean getEquiped(){
+		return this.equiped;
+	}
 	public int getHp() {
-		return hp;
+		return this.hp;
 	}
 
 	public void setHp(int hp) {
@@ -22,7 +43,7 @@ public class Item {
 	}
 
 	public int getAttack() {
-		return attack;
+		return this.attack;
 	}
 
 	public void setAttack(int attack) {
@@ -30,7 +51,7 @@ public class Item {
 	}
 
 	public double getHit_rate() {
-		return hit_rate;
+		return this.hit_rate;
 	}
 
 	public void setHit_rate(double hit_rate) {
@@ -38,11 +59,11 @@ public class Item {
 	}
 
 	public String getName() {
-		return name;
+		return this.name;
 	}
 
 	public ItemID getItemId() {
-		return itemId;
+		return this.itemId;
 	}
 
 	public void setItemId(ItemID itemId) {
