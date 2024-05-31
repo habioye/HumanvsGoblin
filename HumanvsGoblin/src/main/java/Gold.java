@@ -1,21 +1,24 @@
+import java.awt.image.BufferedImage;
+import java.io.File;
+
+import javax.imageio.ImageIO;
+
 public class Gold extends Item {
-	private int amount;
 
-	public Gold(int amount) {
-		this.setName("Gold");
-		this.setItemId(ItemID.GOLD);
+
+	public Gold() {
+		name = "Gold";
+		itemId = ItemID.GOLD;
+		try {
+            image = ImageIO.read(new File("assets/gold.png"));
+            
+        } catch (Exception e) {
+            // TODO: handle exception
+            e.printStackTrace();
+        }
 	}
-
-	public int getAmount() {
-		return amount;
+	
+	public BufferedImage getImage(){
+		return image;
 	}
-
-	public void setAmount(int amount) {
-		this.amount = amount;
-	}
-
-	public void addAmount() {
-		this.amount += amount;
-	}
-
 }

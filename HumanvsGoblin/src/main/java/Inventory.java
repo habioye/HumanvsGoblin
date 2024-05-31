@@ -19,7 +19,7 @@ public class Inventory extends JPanel implements ActionListener{
     Timer timer;
     boolean running = false;
     final int[] cursor = new int[2];
-    ArrayList<Item> backpack = new ArrayList<Item>();
+    ArrayList<Item> backpack = Player.backpack;
     int currRow = 0;
     int currCol = 0;
     
@@ -44,7 +44,6 @@ public class Inventory extends JPanel implements ActionListener{
         backpack.add(new Item(0,"Gold",Item.ItemID.GOLD,null));
         
         HumanvsGoblin.human.setWeapon(0);
-
         play();
     }
 
@@ -69,7 +68,6 @@ public class Inventory extends JPanel implements ActionListener{
         graphics2d.fillRect(0, 0, WIDTH/2, HEIGHT/2);
         
         //inventory
-       
         final int slotXStart = WIDTH/2/2 +25;
         final int slotYStart = 25;
         int slotX = slotXStart;

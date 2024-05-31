@@ -17,14 +17,6 @@ public class Item {
 		this.itemId = ItemID.SWORD;
 
 	}
-	public Item(int attack, String name, ItemID itemID, BufferedImage image){
-		this.image = image;
-		this.attack = attack;
-		this.name = name;
-		this.itemId = itemID;
-
-
-	}
 	
 	public int getAttack() {
 		return this.attack;

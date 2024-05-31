@@ -1,18 +1,22 @@
 
 import java.util.ArrayList;
 
+import javax.swing.ImageIcon;
+
 public class Player {
     public int currentHP;
     public static int maxHP;
     public static int attack;
     public static int def;
     public int gold;
+    public static ArrayList<Item> backpack ;
     protected ImageIcon icon;
     public Player(){
         maxHP = (int)(Math.random()*6)+30;
         currentHP = maxHP;
         attack = 10;
         def = 3;
+        backpack = new ArrayList<Item>();
         icon = new ImageIcon("HumanvsGoblin/HumanvsGoblin/src/main/java/assets/human.jpeg");  
     }
     public int getHealth(){

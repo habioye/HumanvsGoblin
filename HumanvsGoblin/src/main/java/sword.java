@@ -1,11 +1,13 @@
 
 import java.awt.image.BufferedImage;
 import java.io.File;
+import Random;
 
 import javax.imageio.ImageIO;
 
 public class sword extends Item{
     public sword(){
+        int random = new Random();
         attack = 15;
 		name = "Sword";
 		itemId = ItemID.SWORD;
