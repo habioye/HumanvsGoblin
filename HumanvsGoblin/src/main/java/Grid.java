@@ -51,12 +51,16 @@ public class Grid extends JPanel {
 
      for (int x = gridsize; x <= (gridsize*units); x+=gridsize) {
          for (int y = gridsize; y <= (gridsize*units); y+=gridsize) {
-//             g.drawRect(x,y,gridsize,gridsize);
              g.drawImage(image,x,y,gridsize,gridsize,this);
          }
         }
     for (var player: players) {
         loadImage(player.path);
+        g.setColor(Color.BLUE);
+        g.drawRect(player.x-40,player.y,gridsize,gridsize); // left
+        g.drawRect(player.x+40,player.y,gridsize,gridsize); // right
+        g.drawRect(player.x,player.y-40,gridsize,gridsize); // top
+        g.drawRect(player.x,player.y+40,gridsize,gridsize); // bottom
         g.drawImage(image,player.x,player.y,player.width,player.height,this);
 
     }
