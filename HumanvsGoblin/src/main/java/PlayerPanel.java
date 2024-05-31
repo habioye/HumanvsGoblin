@@ -14,15 +14,17 @@ public class PlayerPanel extends JPanel {
     private void loadImage(String imagePath) {
         ImageIcon imageIcon = new ImageIcon(imagePath);
         image = imageIcon.getImage();
+        
+        
     }
 
     @Override
-    public void paint(Graphics g) {
+    public void paintComponent(Graphics g) {
         super.paintComponent(g);
 
 //        if (image != null) {
             // Draw the image at position (0, 0) and scale it to the panel size
-            System.out.println("painted the component");
+//            System.out.println("painted the component");
             for (var player: players) {
                 loadImage(player.path);
                 g.drawImage(image,player.x,player.y,player.width,player.height,this);
