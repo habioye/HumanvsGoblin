@@ -1,4 +1,3 @@
-import java.awt.image.BufferedImage;
 import java.awt.*;
 import java.awt.event.*;
 
@@ -19,7 +18,7 @@ public class Inventory extends JPanel implements ActionListener{
     Timer timer;
     boolean running = false;
     final int[] cursor = new int[2];
-    ArrayList<Item> backpack = Player.backpack;
+    ArrayList<Item> backpack = new ArrayList<Item>();
     int currRow = 0;
     int currCol = 0;
     
@@ -32,10 +31,10 @@ public class Inventory extends JPanel implements ActionListener{
         
         
         backpack.add(new sword());
-        backpack.add(new sword());
-        backpack.add(new Gold());
-        backpack.add(new sword());
-        backpack.add(new Gold());
+        // backpack.add(new sword());
+        // backpack.add(new Gold());
+        // backpack.add(new sword());
+        // backpack.add(new Gold());
         
         HumanvsGoblin.human.setWeapon(0);
         play();
@@ -70,7 +69,7 @@ public class Inventory extends JPanel implements ActionListener{
         graphics2d.setColor(Color.RED);
         for(int i = 0; i < backpack.size();i++){
             if(backpack.get(i).getItemId().equals(Item.ItemID.SWORD)){
-                graphics2d.drawImage(backpack.get(i).image,slotX, slotY,35,35,null);
+                //graphics2d.drawImage(backpack.get(i).image,slotX, slotY,35,35,null);
 
             }else{
                 graphics2d.setColor(Color.YELLOW);
@@ -111,7 +110,12 @@ public class Inventory extends JPanel implements ActionListener{
         graphics2d.setFont(new Font("Sans serif", Font.ROMAN_BASELINE, 20));
         graphics2d.drawString("Player Stats",10 ,graphics2d.getFont().getSize()+10);
         
-        graphics2d.drawString("Attack: "+ backpack.get(HumanvsGoblin.human.getWeapon()).getAttack(), 10, graphics2d.getFont().getSize()*2+10);
+        if(backpack.size()>0){
+            graphics2d.drawString("Attack: "+ backpack.get(HumanvsGoblin.human.getWeapon()).getAttack(), 10, graphics2d.getFont().getSize()*2+10);
+        }else{
+            graphics2d.drawString("Attack: "+ 0, 10, graphics2d.getFont().getSize()*2+10);
+        }
+        
         graphics2d.drawString("Defense: "+-12, 10, graphics2d.getFont().getSize()*3+10);
     }
 
