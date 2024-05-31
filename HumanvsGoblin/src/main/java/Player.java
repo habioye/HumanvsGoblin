@@ -9,11 +9,13 @@ public class Player {
     public static int attack;
     public static int def;
     public int gold;
+    public int currWeapon;
     public static ArrayList<Item> backpack ;
     protected ImageIcon icon;
     public Player(){
         maxHP = (int)(Math.random()*6)+30;
         currentHP = maxHP;
+        currWeapon = -1;
         attack = 10;
         def = 3;
         backpack = new ArrayList<Item>();

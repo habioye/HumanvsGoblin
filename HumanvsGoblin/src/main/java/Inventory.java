@@ -29,19 +29,13 @@ public class Inventory extends JPanel implements ActionListener{
         this.setBackground(Color.black);
         this.setFocusable(true);
         this.addKeyListener(new MyKeyAdapter());
-        BufferedImage image;
-        try {
-            image = ImageIO.read(getClass().getResourceAsStream("/assets/sword.png"));
-        } catch (Exception e) {
-            // TODO: handle exception
-        }
+        
         
         backpack.add(new sword());
         backpack.add(new sword());
-        backpack.add(new Item(0,"Gold",Item.ItemID.GOLD,null));
+        backpack.add(new Gold());
         backpack.add(new sword());
-        backpack.add(new Item(0,"Gold",Item.ItemID.GOLD,null));
-        backpack.add(new Item(0,"Gold",Item.ItemID.GOLD,null));
+        backpack.add(new Gold());
         
         HumanvsGoblin.human.setWeapon(0);
         play();
