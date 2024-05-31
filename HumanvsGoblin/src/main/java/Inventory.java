@@ -1,13 +1,14 @@
+import java.awt.image.BufferedImage;
 import java.awt.*;
 import java.awt.event.*;
-import javax.swing.*;
 
+import javax.imageio.ImageIO;
+import javax.swing.*;
 import java.util.ArrayList;
+
 import java.util.Random;
 
 import javax.swing.JPanel;
-
-
 
 public class Inventory extends JPanel implements ActionListener{
     static final int WIDTH = 800;
@@ -19,6 +20,8 @@ public class Inventory extends JPanel implements ActionListener{
     boolean running = false;
     final int[] cursor = new int[2];
     ArrayList<Item> backpack = new ArrayList<Item>();
+    int currRow = 0;
+    int currCol = 0;
     
     public Inventory(){
         random = new Random();
@@ -26,15 +29,22 @@ public class Inventory extends JPanel implements ActionListener{
         this.setBackground(Color.black);
         this.setFocusable(true);
         this.addKeyListener(new MyKeyAdapter());
-        System.out.println(this.getWidth());
-        backpack.add(new Item(15,"Sword",Item.ItemID.SWORD));
-        backpack.add(new Item(15,"Sword",Item.ItemID.SWORD));
-        backpack.add(new Item(0,"Gold",Item.ItemID.GOLD));
-        backpack.add(new Item(15,"Sword",Item.ItemID.SWORD));
-        backpack.get(3).setEquiped(true);
-        backpack.add(new Item(0,"Gold",Item.ItemID.GOLD));
-        backpack.add(new Item(0,"Gold",Item.ItemID.GOLD));
-        System.out.println(backpack.size());
+        BufferedImage image;
+        try {
+            image = ImageIO.read(getClass().getResourceAsStream("/assets/sword.png"));
+        } catch (Exception e) {
+            // TODO: handle exception
+        }
+        
+        backpack.add(new sword());
+        backpack.add(new sword());
+        backpack.add(new Item(0,"Gold",Item.ItemID.GOLD,null));
+        backpack.add(new sword());
+        backpack.add(new Item(0,"Gold",Item.ItemID.GOLD,null));
+        backpack.add(new Item(0,"Gold",Item.ItemID.GOLD,null));
+        
+        HumanvsGoblin.human.setWeapon(0);
+
         play();
     }
 
@@ -68,38 +78,30 @@ public class Inventory extends JPanel implements ActionListener{
         graphics2d.setColor(Color.RED);
         for(int i = 0; i < backpack.size();i++){
             if(backpack.get(i).getItemId().equals(Item.ItemID.SWORD)){
-                graphics2d.setColor(Color.RED);
+                graphics2d.drawImage(backpack.get(i).image,slotX, slotY,35,35,null);
 
             }else{
-                graphics2d.setColor(Color.YELLOW);  
+                graphics2d.setColor(Color.YELLOW);
+                graphics2d.fillRect(slotX, slotY, slotSize, slotSize);
+                  
             }
-            if (backpack.get(i).getEquiped()){
-                graphics2d.setColor(Color.BLUE);  
+            if (HumanvsGoblin.human.getWeapon() == i){
+                graphics2d.setColor(new Color(135,206,250,100));  
+                graphics2d.fillRect(slotX, slotY, slotSize, slotSize);
+                
             }
-
-            graphics2d.fillRect(slotX, slotY, slotSize, slotSize);
             slotX+= slotSize+20;
 
             if(i == 2 ||i == 5 ||i == 8 ||i == 11 ||i == 14 ||i == 17){
                 slotX = slotXStart;
                 slotY += slotSize+20; 
             }
-            
-
         }
         
-
         //cursor
         graphics2d.setColor(Color.WHITE);
         graphics2d.setStroke(new BasicStroke(5));
         graphics2d.drawRoundRect(cursor[0], cursor[1], UNIT_SIZE, UNIT_SIZE,25,25);
-
-        //stat
-        
-
-        // graphics2d.setColor((Color.white));
-        // graphics2d.setFont(new Font("Sans serif", Font.ROMAN_BASELINE, 20));
-        // graphics2d.drawString("Inventory",WIDTH/2/2+5+8 ,graphics2d.getFont().getSize()+5);
 
         
     }
@@ -117,9 +119,7 @@ public class Inventory extends JPanel implements ActionListener{
         graphics2d.setFont(new Font("Sans serif", Font.ROMAN_BASELINE, 20));
         graphics2d.drawString("Player Stats",10 ,graphics2d.getFont().getSize()+10);
         
-        
-        
-        graphics2d.drawString("Attack: "+ 12, 10, graphics2d.getFont().getSize()*2+10);
+        graphics2d.drawString("Attack: "+ backpack.get(HumanvsGoblin.human.getWeapon()).getAttack(), 10, graphics2d.getFont().getSize()*2+10);
         graphics2d.drawString("Defense: "+-12, 10, graphics2d.getFont().getSize()*3+10);
     }
 
@@ -137,24 +137,26 @@ public class Inventory extends JPanel implements ActionListener{
             //Handle key pressed events
             switch (e.getKeyCode()) {
                 case KeyEvent.VK_LEFT:
-                    System.out.println(cursor[0]);
+                    //moves left
                     if (cursor[0]- UNIT_SIZE > WIDTH/2/2+5){
                         cursor[0] -=UNIT_SIZE;
+                        currCol-=1;
                     }
                     
                     break;
                 case KeyEvent.VK_RIGHT:
                     // Move right
 
-                    System.out.println(cursor[0]);
                     if (cursor[0]+ UNIT_SIZE < WIDTH/2 - UNIT_SIZE - 10){
                         cursor[0] +=UNIT_SIZE;
+                        currCol+=1;
                     }
                     break;
                 case KeyEvent.VK_UP:
                     // Move up
                     if(cursor[1]- UNIT_SIZE > 10){
                         cursor[1] -=UNIT_SIZE;
+                        currRow-=1;
                     }
                     
                     break;
@@ -162,13 +164,18 @@ public class Inventory extends JPanel implements ActionListener{
                     // Move down
                     if (cursor[1]+ UNIT_SIZE < HEIGHT/2 - UNIT_SIZE-10){
                         cursor[1] +=UNIT_SIZE;
+                        currRow+=1;
                     }
                     
                     break;
                 
-                case KeyEvent.VK_E:
+                case KeyEvent.VK_ENTER:
+                    int index = (currRow*3)+(currCol);
+                    HumanvsGoblin.human.setWeapon(index);
+                    break;
 
             }
+            System.out.println(currCol+currRow);
         }
     }
 }
