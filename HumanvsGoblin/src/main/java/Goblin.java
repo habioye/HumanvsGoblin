@@ -1,27 +1,17 @@
-
-
-import java.util.ArrayList;
-
-import javax.swing.ImageIcon;
-
-
-public class Player {
+import javax.swing.*;
+public class Goblin {
     public int currentHP;
     public static int maxHP;
     public static int attack;
     public static int def;
     public int gold;
-    public int currWeapon;
-    public static ArrayList<Item> backpack ;
     protected ImageIcon icon;
-    public Player(){
-        maxHP = (int)(Math.random()*6)+30;
+    public Goblin(){
+        maxHP = (int)(Math.random()*4)+20;
         currentHP = maxHP;
-        currWeapon = -1;
-        attack = 10;
-        def = 3;
-        backpack = new ArrayList<Item>();
-        icon = new ImageIcon("HumanvsGoblin/HumanvsGoblin/src/main/java/assets/human.jpeg");  
+        attack = 7;
+        def = 2;
+        icon = new ImageIcon("HumanvsGoblin/src/main/java/assets/pngtree-goblin-cartoon-png-image_4008070.jpeg");  
     }
     public int getHealth(){
         return currentHP;
@@ -54,15 +44,8 @@ public class Player {
         return (int)(Math.random() * 2) + attack;
     }
     public String inspect(){
-        return "Player:  "+"\nHP: "+currentHP+" / "+maxHP+"\n Attack: "+attack+" - " + (attack+1)+"\nDefense: "+def+" - "+(def+1);
+        //System.out.println("Goblin:  "+"\nHP: "+currentHP+" / "+maxHP+"\n Attack: "+attack+" - " + (attack+1)+"\nDefense: "+def+" - "+(def+1));
+        return "Goblin:  "+"\nHP: "+currentHP+" / "+maxHP+"\n Attack: "+attack+" - " + (attack+1)+"\nDefense: "+def+" - "+(def+1);
     }
-
-    public int getWeapon(){
-        return this.currWeapon;
-    }
-    public void setWeapon(int currWeapon){
-        this.currWeapon = currWeapon;
-    }
-
 
 }

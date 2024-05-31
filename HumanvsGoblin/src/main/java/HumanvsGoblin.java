@@ -10,6 +10,13 @@ import java.util.*;
 
 public class HumanvsGoblin {
 
+    public static Player human = new Player();
+    public Player goblin = new Player();
+
+//         ImagePanel humanAsset = new ImagePanel(10,10,40,40,"assets/human.jpeg");
+//         ImagePanel goblinAsset = new ImagePanel(100,100,40,40,"assets/goblin.jpeg");
+
+
     public static int playerpos(int p) {
         return (40+(p*40));
     }
@@ -54,8 +61,17 @@ public class HumanvsGoblin {
 //        ImagePanel goblinAsset = new ImagePanel(100,100,40,40,"assets/goblin.jpeg");
         System.out.println("Stop");
 
-//        humanAsset.setPreferredSize(new Dimension(500,500));
-//        goblinAsset.setPreferredSize(new Dimension(50,50));
+
+// //        humanAsset.setPreferredSize(new Dimension(500,500));
+// //        goblinAsset.setPreferredSize(new Dimension(50,50));
+
+//         Grid grid =  new Grid(40,20);
+
+//         JFrame window = new JFrame("Grid");
+//         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//         window.add(grid);
+//         window.add(humanAsset);
+//         window.add(goblinAsset);
 
         int cellSize = 40;
         int unitLength = 20;
@@ -90,14 +106,14 @@ public class HumanvsGoblin {
 //            }
 //        });
 
-        window.pack();
-        window.setLocationRelativeTo(null);
-        window.setVisible(true);
-        window.setSize(900,900);
+//         window.pack();
+//         window.setLocationRelativeTo(null);
+//         window.setVisible(true);
+//         window.setSize(900,900);
 
         boolean humanT = true;
-        Player humnan = new Player();
-        Player goblin = new Player();
+        
+
 
         boolean ch = false;
 //        Thread frame = new Thread(()-> {
@@ -191,6 +207,7 @@ public class HumanvsGoblin {
             if (humanx == goblinx && humany == gobliny) {
                 System.out.println("They are in the same square! You can start the battle!!!!!");
 
+
             }
             System.out.println("moved");
 //            PlayerAsset human = players.get(0);
@@ -206,8 +223,8 @@ public class HumanvsGoblin {
 //            window.add(playerPanel);
             grid.repaint();
 
-            humanT = !humanT;
-        }
+        //     humanT = !humanT;
+        // }
     }
 
 }

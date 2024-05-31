@@ -1,48 +1,37 @@
+import java.awt.image.BufferedImage;
+
 public class Item {
 	public enum ItemID {
 		GOLD, SWORD
 	}
 
-	private int hp;
-	private int attack;
-	private double hit_rate;
-	private String name;
-	private ItemID itemId;
+	public BufferedImage image;
+	public int attack;
+	public String name;
+	public ItemID itemId;
+
 
 	public Item() {
+		this.attack = 0;
+		this.name = "";
+		this.itemId = ItemID.SWORD;
 
 	}
-
-	public int getHp() {
-		return hp;
-	}
-
-	public void setHp(int hp) {
-		this.hp = hp;
-	}
-
+	
 	public int getAttack() {
-		return attack;
+		return this.attack;
 	}
 
 	public void setAttack(int attack) {
 		this.attack = attack;
 	}
 
-	public double getHit_rate() {
-		return hit_rate;
-	}
-
-	public void setHit_rate(double hit_rate) {
-		this.hit_rate = hit_rate;
-	}
-
 	public String getName() {
-		return name;
+		return this.name;
 	}
 
 	public ItemID getItemId() {
-		return itemId;
+		return this.itemId;
 	}
 
 	public void setItemId(ItemID itemId) {
