@@ -1,4 +1,6 @@
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.image.CropImageFilter;
 
 import javax.swing.*;
@@ -6,13 +8,18 @@ import javax.swing.*;
 public class Combat {
     static JFrame f;
     static JLabel l;
-    JFrame window;
+    static JFrame window;
     Container con;
     JPanel titleNamePanel, goblinHPPanel,PlayerHPPanel, goblinPanel, fightPanel, invetoryPanel, inspectPanel;
     JProgressBar GoblinHealthBar, playerHealthBar;
     JLabel playerHealthLabel, goblinLabel, humanLabel;
     JButton fightButton, inventoryButton, inspectButton;
-    int goblinHP = 20;
+    static Goblin enemy;
+    static Player player;
+
+    static Goblin gobby = new Goblin();
+    static Player human = new Player();
+
     public static void combatDisplay(){
         JFrame frame = new JFrame("Combat Screen");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -23,6 +30,7 @@ public class Combat {
         frame.setVisible(true);
     }
     public Combat(){
+
         window = new JFrame();
         window.setSize(800,600);
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -39,7 +47,7 @@ public class Combat {
         GoblinHealthBar = new JProgressBar(0,20);
         GoblinHealthBar.setPreferredSize(new Dimension(150,30));
         //Set HP goblin value
-        GoblinHealthBar.setValue(goblinHP);
+        GoblinHealthBar.setValue(gobby.currentHP);
         GoblinHealthBar.setBackground(Color.RED);
         GoblinHealthBar.setStringPainted(true);
         GoblinHealthBar.setString("Goblin HP: "+GoblinHealthBar.getValue());
@@ -51,9 +59,10 @@ public class Combat {
         goblinLabel = new JLabel(goblin);
         window.add(goblinLabel);
 
-        ImageIcon human = new ImageIcon("C:/Users/Tman4/OneDrive/Documents/Java Training/HumanvsGoblin/HumanvsGoblin/src/main/java/assets/human.jpeg");
-        human.setImage(human.getImage());
-        humanLabel = new JLabel(human);
+        ImageIcon humanIcon = new ImageIcon("C:/Users/Tman4/OneDrive/Pictures/amy mood.png");
+        humanIcon.setImage(humanIcon.getImage());
+        humanLabel = new JLabel(humanIcon);
+        //JOptionPane.showMessageDialog(humanLabel, "Gobby", "Gobby", Goblin.currentHP);
         window.add(humanLabel);
 
         PlayerHPPanel = new JPanel();
@@ -61,9 +70,9 @@ public class Combat {
         PlayerHPPanel.setBackground(Color.BLACK);
         window.add(PlayerHPPanel);
 
-        playerHealthBar = new JProgressBar(0,30);
+        playerHealthBar = new JProgressBar(0,human.getHealth());
         playerHealthBar.setPreferredSize(new Dimension(150,30));
-        playerHealthBar.setValue(Player.HP);
+        playerHealthBar.setValue(human.getHealth());
         playerHealthBar.setStringPainted(true);
         playerHealthBar.setString("Player HP: "+playerHealthBar.getValue());
         PlayerHPPanel.add(playerHealthBar);
@@ -79,6 +88,16 @@ public class Combat {
         fightButton.setBackground(Color.black);
         fightButton.setForeground(Color.WHITE);
         fightButton.setFocusPainted(false);
+        fightButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e){  
+                attack();
+                window.setVisible(false);  
+                window.dispose();
+                if((gobby.currentHP>0)){
+                new Combat();
+                }
+            }
+        });
         fightPanel = new JPanel();
         fightPanel.setBounds(100,450,150,30);
         fightPanel.setBackground(Color.black);
@@ -100,6 +119,11 @@ public class Combat {
         inspectButton.setBackground(Color.black);
         inspectButton.setForeground(Color.WHITE);
         inspectButton.setFocusPainted(false);
+        inspectButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e){  
+                inspect();
+            }
+        });
         inspectPanel = new JPanel();
         inspectPanel.setBounds(200,450,150,30);
         inspectPanel.setBackground(Color.black);
@@ -108,16 +132,36 @@ public class Combat {
 
     }
     public static void attack(){
-        Player.attackDamage = Player.attack-Goblin.def;
-        System.out.println("Goblin took: "+Player.attackDamage+" damage");
 
+        /*while(!enemy.isDead() && !player.isDead()){
+            JOptionPane.showOptionDialog(null, "A goblin starts to attack you. What do you do? ", null, 0, 0, null, null, null);
+        }*/
+        int playerDamage = (human.getAttack()-gobby.getDefense());
+        gobby.damageTaken(playerDamage);
+        if(gobby.isDead()){
+            JOptionPane.showMessageDialog(null, "Goblin has been slain", "Victory", 0);
+            window.setVisible(false);
+            window.dispose();
+        }
+        int goblinDamage = (gobby.getAttack()-human.getDefense());
+        human.damageTaken(goblinDamage);
+        if(human.isDead()){
+            JOptionPane.showMessageDialog(null, "You have been slain", "Death", 0);
+            window.setVisible(false);
+            window.dispose();
+        }
         
+        
+    }
+    public void inspect(){
+        JOptionPane.showMessageDialog(null, gobby.inspect(), "Inspect", 0);
+        //gobby.inspect();
     }
     //public void Display();
     public static void main(String[] args){
         //combatDisplay();
-        //CD1();
-        attack();
+        //CD1
+        //while(!human.isDead() || !gobby.isDead()){
         new Combat();
     }
 
