@@ -1,7 +1,6 @@
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.image.CropImageFilter;
 
 import javax.swing.*;
 
@@ -17,6 +16,7 @@ public class Combat {
 
     static Goblin gobby = new Goblin();
     static Player human = new Player();
+    static Inventory bag = new Inventory();
 
     public static void combatDisplay(){
         JFrame frame = new JFrame("Combat Screen");
@@ -106,6 +106,11 @@ public class Combat {
         inventoryButton.setBackground(Color.black);
         inventoryButton.setForeground(Color.WHITE);
         inventoryButton.setFocusPainted(false);
+        inventoryButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e){  
+                inventory();
+            }
+        });
         invetoryPanel = new JPanel();
         invetoryPanel.setBounds(100, 475,150,30);
         invetoryPanel.setBackground(Color.black);
@@ -129,11 +134,8 @@ public class Combat {
         window.add(inspectPanel);
 
     }
+    //method to start attacking goblin
     public static void attack(){
-
-        /*while(!enemy.isDead() && !player.isDead()){
-            JOptionPane.showOptionDialog(null, "A goblin starts to attack you. What do you do? ", null, 0, 0, null, null, null);
-        }*/
         int playerDamage = (human.getAttack()-gobby.getDefense());
         gobby.damageTaken(playerDamage);
         if(gobby.isDead()){
@@ -151,15 +153,29 @@ public class Combat {
         
         
     }
+    //method to check goblin stats
     public void inspect(){
         JOptionPane.showMessageDialog(null, gobby.inspect(), "Inspect", 0);
         //gobby.inspect();
     }
-    //public void Display();
+    //method to check current inventory and equip a new item
+    public void inventory(){
+        int attackValue=0;
+        String itemName="";
+        Object[] options = bag.backpack.toArray();
+        int choice = JOptionPane.showOptionDialog(null,"Select item from inventory","Inventory",JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE, null, options, null);
+        if(bag.backpack.get(choice-1).getItemId().equals(Item.ItemID.SWORD)){
+            attackValue = bag.backpack.get(choice-1).getAttack();
+            itemName = bag.backpack.get(choice-1).getName();
+        }
+        if(bag.backpack.get(choice-1).getItemId().equals(Item.ItemID.GOLD)){
+            attackValue = bag.backpack.get(choice-1).getAttack();
+            itemName = bag.backpack.get(choice-1).getName();
+        }
+        JOptionPane.showMessageDialog(null, itemName+" has been selected. "+attackValue+" attack added. ", "Item Equipped", 0);
+        human.setAttck(attackValue);
+    }
     public static void main(String[] args){
-        //combatDisplay();
-        //CD1
-        //while(!human.isDead() || !gobby.isDead()){
         new Combat();
     }
 

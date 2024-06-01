@@ -1,6 +1,4 @@
-
-import java.util.ArrayList;
-
+import javax.swing.*;
 public class Player {
     public int currentHP;
     public static int maxHP;
@@ -30,7 +28,7 @@ public class Player {
             currentHP=0;
         }
     }
-    public ImageIcon getIcon(){
+    public ImageIcon getImage(){
         return icon;
     }
     public boolean isDead(){
@@ -45,16 +43,11 @@ public class Player {
     public int getAttack(){
         return (int)(Math.random() * 2) + attack;
     }
+    public void setAttck(int newAttack){
+        attack+=newAttack;
+    }
     public String inspect(){
         return "Player:  "+"\nHP: "+currentHP+" / "+maxHP+"\n Attack: "+attack+" - " + (attack+1)+"\nDefense: "+def+" - "+(def+1);
     }
-
-    public int getWeapon(){
-        return this.currWeapon;
-    }
-    public void setWeapon(int currWeapon){
-        this.currWeapon = currWeapon;
-    }
-
 
 }
