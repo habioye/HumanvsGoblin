@@ -7,8 +7,6 @@ import java.util.ArrayList;
 
 import java.util.Random;
 
-import javax.swing.JPanel;
-
 public class Inventory extends JPanel implements ActionListener{
     static final int WIDTH = 800;
 	static final int HEIGHT = 800;
@@ -18,9 +16,21 @@ public class Inventory extends JPanel implements ActionListener{
     Timer timer;
     boolean running = false;
     final int[] cursor = new int[2];
-    ArrayList<Item> backpack = new ArrayList<Item>();
+    static ArrayList<Item> backpack = new ArrayList<Item>();
     int currRow = 0;
     int currCol = 0;
+    JFrame inventoryFrame;
+    
+    public void inventoryFrame(){
+        inventoryFrame = new JFrame("Inventory");
+        Inventory panel = new Inventory();
+		inventoryFrame.add(panel);
+		inventoryFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		inventoryFrame.setResizable(true);
+		inventoryFrame.pack();
+		inventoryFrame.setVisible(true);
+		inventoryFrame.setLocationRelativeTo(null);
+    }
     
     public Inventory(){
         random = new Random();

@@ -3,7 +3,7 @@ import java.awt.event.KeyListener;
 
 public class MoveHandler implements KeyListener {
 
-    private boolean upDirection, downDirection, leftDirection, rightDirection;
+    private boolean upDirection, downDirection, leftDirection, rightDirection,inventory;
 
     @Override
     public void keyPressed(KeyEvent e) {
@@ -13,6 +13,16 @@ public class MoveHandler implements KeyListener {
         if(key == KeyEvent.VK_S || key == KeyEvent.VK_DOWN) {downDirection = true;}
         if(key == KeyEvent.VK_A || key == KeyEvent.VK_LEFT) {leftDirection = true;}
         if(key == KeyEvent.VK_D || key == KeyEvent.VK_RIGHT) {rightDirection = true;}
+        if(key == KeyEvent.VK_I) {
+            if(inventory){
+                inventory = false;
+                HumanvsGoblin.inventory.setVisible(inventory);
+            }else{
+                inventory = true;
+                HumanvsGoblin.inventory.setVisible(inventory);
+            }
+        }
+        
     }
 
     @Override
@@ -23,6 +33,7 @@ public class MoveHandler implements KeyListener {
         if(key == KeyEvent.VK_S || key == KeyEvent.VK_DOWN) {downDirection = false;}
         if(key == KeyEvent.VK_A || key == KeyEvent.VK_LEFT) {leftDirection = false;}
         if(key == KeyEvent.VK_D || key == KeyEvent.VK_RIGHT) {rightDirection = false;}
+        if(key == KeyEvent.VK_I) {inventory = false;}
         return;
     }
 
@@ -46,5 +57,8 @@ public class MoveHandler implements KeyListener {
 
     public boolean getRight() {
         return rightDirection;
+    }
+    public boolean getInventory(){
+        return inventory;
     }
 }
