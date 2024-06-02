@@ -7,10 +7,10 @@ public class Goblin {
     public int gold;
     protected ImageIcon icon;
     public Goblin(){
-        maxHP = (int)(Math.random()*4)+20;
+        maxHP = (int)(Math.random()*4)+50;
         currentHP = maxHP;
         attack = 7;
-        def = 2;
+        def = 5;
         icon = new ImageIcon("HumanvsGoblin/src/main/java/assets/pngtree-goblin-cartoon-png-image_4008070.jpeg");  
     }
     public int getHealth(){

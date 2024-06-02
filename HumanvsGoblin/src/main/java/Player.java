@@ -8,7 +8,7 @@ import javax.swing.ImageIcon;
 public class Player {
     public int currentHP;
     public static int maxHP;
-    public static int attack;
+    public int attack;
     public static int def;
     public int gold;
     public int currWeapon;
@@ -63,6 +63,10 @@ public class Player {
     public void setWeapon(int currWeapon){
         this.currWeapon = currWeapon;
     }
-
+    public void setAttack(int newAttack) {
+		this.attack = attack;
+        attack+=newAttack;
+        
+	}
 
 }
