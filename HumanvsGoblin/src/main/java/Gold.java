@@ -1,21 +1,26 @@
+import java.awt.*;
+import java.io.File;
+
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
+
 public class Gold extends Item {
-	private int amount;
+	
 
-	public Gold(int amount) {
-		this.setName("Gold");
-		this.setItemId(ItemID.GOLD);
+	public Gold() {
+		name = "Gold";
+		itemId = ItemID.GOLD;
+		try {
+            ImageIcon imageIcon = new ImageIcon("assets/gold.png");
+			image = imageIcon.getImage();
+            
+        } catch (Exception e) {
+            // TODO: handle exception
+            e.printStackTrace();
+        }
 	}
 
-	public int getAmount() {
-		return amount;
+	public Image getImage(){
+		return image;
 	}
-
-	public void setAmount(int amount) {
-		this.amount = amount;
-	}
-
-	public void addAmount() {
-		this.amount += amount;
-	}
-
 }

@@ -1,11 +1,13 @@
-import java.awt.image.BufferedImage;
+import java.awt.Image;
+
+import javax.swing.ImageIcon;
 
 public class Item {
 	public enum ItemID {
 		GOLD, SWORD
 	}
 
-	public BufferedImage image;
+	public Image image;
 	public int attack;
 	public String name;
 	public ItemID itemId;
@@ -15,14 +17,6 @@ public class Item {
 		this.attack = 0;
 		this.name = "";
 		this.itemId = ItemID.SWORD;
-
-	}
-	public Item(int attack, String name, ItemID itemID, BufferedImage image){
-		this.image = image;
-		this.attack = attack;
-		this.name = name;
-		this.itemId = itemID;
-
 
 	}
 	
