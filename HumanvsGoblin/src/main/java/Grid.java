@@ -11,11 +11,12 @@ public class Grid extends JPanel {
     ArrayList<PlayerAsset> players;
     String path;
 
-//    String path;
+    //    String path;
     MoveHandler moveHandler;
     Image image;
+
     public Grid(int gridsize, int units, ArrayList<PlayerAsset> players, String path) {
-        setSize(900,900);
+        setSize(900, 900);
         setVisible(true);
         this.gridsize = gridsize;
         this.units = units;
@@ -37,35 +38,32 @@ public class Grid extends JPanel {
 
     @Override
     public Dimension getPreferredSize() {
-        return new Dimension((gridsize*units)+100,(gridsize*units)+100);
+        return new Dimension((gridsize * units) + 100, (gridsize * units) + 100);
     }
-
 
 
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
-//        g.drawImage(image,100,100,gridsize,gridsize,this);
         loadImage(path);
 
 
-     for (int x = gridsize; x <= (gridsize*units); x+=gridsize) {
-         for (int y = gridsize; y <= (gridsize*units); y+=gridsize) {
-             g.drawImage(image,x,y,gridsize,gridsize,this);
-         }
+        for (int x = gridsize; x <= (gridsize * units); x += gridsize) {
+            for (int y = gridsize; y <= (gridsize * units); y += gridsize) {
+                g.drawImage(image, x, y, gridsize, gridsize, this);
+            }
         }
-    for (var player: players) {
-        loadImage(player.path);
-        g.setColor(Color.BLUE);
-        g.drawRect(player.x-40,player.y,gridsize,gridsize); // left
-        g.drawRect(player.x+40,player.y,gridsize,gridsize); // right
-        g.drawRect(player.x,player.y-40,gridsize,gridsize); // top
-        g.drawRect(player.x,player.y+40,gridsize,gridsize); // bottom
-        g.drawImage(image,player.x,player.y,player.width,player.height,this);
+        for (var player : players) {
+            loadImage(player.path);
+            g.setColor(Color.BLUE);
+            g.drawRect(player.x - 40, player.y, gridsize, gridsize); // left
+            g.drawRect(player.x + 40, player.y, gridsize, gridsize); // right
+            g.drawRect(player.x, player.y - 40, gridsize, gridsize); // top
+            g.drawRect(player.x, player.y + 40, gridsize, gridsize); // bottom
+            g.drawImage(image, player.x, player.y, player.width, player.height, this);
 
+        }
     }
-    }
-
 
 
 }
