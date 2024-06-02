@@ -1,6 +1,6 @@
 import java.awt.*;
 import javax.swing.*;
-import java.util.ArrayList;
+
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.lang.Thread;
@@ -74,7 +74,14 @@ public class HumanvsGoblin{
 
 
         JFrame window = new JFrame("Human vs Goblin!");
-
+        Inventory panel = new Inventory();
+        inventory.add(panel);
+        inventory.setTitle("Inventory");
+        inventory.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+        inventory.setResizable(false);
+        inventory.pack();
+        inventory.setLocationRelativeTo(null);
+        Inventory.backpack.add(new sword());
         
         boolean inventoryFrame = false;
 
