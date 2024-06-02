@@ -1,4 +1,3 @@
-import java.awt.image.BufferedImage;
 import java.awt.*;
 import java.awt.event.*;
 
@@ -7,8 +6,6 @@ import javax.swing.*;
 import java.util.ArrayList;
 
 import java.util.Random;
-
-import javax.swing.JPanel;
 
 public class Inventory extends JPanel implements ActionListener{
     static final int WIDTH = 800;
@@ -19,9 +16,21 @@ public class Inventory extends JPanel implements ActionListener{
     Timer timer;
     boolean running = false;
     final int[] cursor = new int[2];
-    ArrayList<Item> backpack = Player.backpack;
+    static ArrayList<Item> backpack = new ArrayList<Item>();
     int currRow = 0;
     int currCol = 0;
+    JFrame inventoryFrame;
+    
+    public void inventoryFrame(){
+        inventoryFrame = new JFrame("Inventory");
+        Inventory panel = new Inventory();
+		inventoryFrame.add(panel);
+		inventoryFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		inventoryFrame.setResizable(true);
+		inventoryFrame.pack();
+		inventoryFrame.setVisible(true);
+		inventoryFrame.setLocationRelativeTo(null);
+    }
     
     public Inventory(){
         random = new Random();
@@ -111,7 +120,12 @@ public class Inventory extends JPanel implements ActionListener{
         graphics2d.setFont(new Font("Sans serif", Font.ROMAN_BASELINE, 20));
         graphics2d.drawString("Player Stats",10 ,graphics2d.getFont().getSize()+10);
         
-        graphics2d.drawString("Attack: "+ backpack.get(HumanvsGoblin.human.getWeapon()).getAttack(), 10, graphics2d.getFont().getSize()*2+10);
+        if(backpack.size()>0){
+            graphics2d.drawString("Attack: "+ backpack.get(HumanvsGoblin.human.getWeapon()).getAttack(), 10, graphics2d.getFont().getSize()*2+10);
+        }else{
+            graphics2d.drawString("Attack: "+ 0, 10, graphics2d.getFont().getSize()*2+10);
+        }
+        
         graphics2d.drawString("Defense: "+-12, 10, graphics2d.getFont().getSize()*3+10);
     }
 

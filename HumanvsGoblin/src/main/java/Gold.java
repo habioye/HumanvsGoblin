@@ -1,24 +1,26 @@
-import java.awt.image.BufferedImage;
+import java.awt.*;
 import java.io.File;
 
 import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 
 public class Gold extends Item {
-
+	
 
 	public Gold() {
 		name = "Gold";
 		itemId = ItemID.GOLD;
 		try {
-            image = ImageIO.read(new File("assets/gold.png"));
+            ImageIcon imageIcon = new ImageIcon("assets/gold.png");
+			image = imageIcon.getImage();
             
         } catch (Exception e) {
             // TODO: handle exception
             e.printStackTrace();
         }
 	}
-	
-	public BufferedImage getImage(){
+
+	public Image getImage(){
 		return image;
 	}
 }

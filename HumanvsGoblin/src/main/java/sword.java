@@ -1,24 +1,19 @@
-
-import java.awt.image.BufferedImage;
+import java.awt.*;
 import java.io.File;
-
-
 import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 
 public class sword extends Item{
+    
     public sword(){
         attack = 15;
 		name = "Sword";
 		itemId = ItemID.SWORD;
-        try {
-            image = ImageIO.read(new File("assets/sword.png"));
-            
-        } catch (Exception e) {
-            // TODO: handle exception
-            e.printStackTrace();
-        }
+        
+        image = new ImageIcon("assets/sword.png").getImage();          
+        
     }
-    public BufferedImage getImage(){
-        return image;
+    public Image getImage(){
+        return this.image;
     }
 }

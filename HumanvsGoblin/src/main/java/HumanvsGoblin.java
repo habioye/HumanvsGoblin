@@ -8,15 +8,22 @@ import java.util.*;
 
 //package PlayerAsset;
 
-public class HumanvsGoblin {
+public class HumanvsGoblin{
 
     public static Player human = new Player();
     public Player goblin = new Player();
+
+    public static JFrame inventory = new JFrame();
+//         ImagePanel humanAsset = new ImagePanel(10,10,40,40,"assets/human.jpeg");
+//         ImagePanel goblinAsset = new ImagePanel(100,100,40,40,"assets/goblin.jpeg");
+
+
 
 
     public static int playerpos(int p) {
         return (40 + (p * 40));
     }
+
 
 
     public static void main(String[] args) {
@@ -67,12 +74,22 @@ public class HumanvsGoblin {
 
 
         JFrame window = new JFrame("Human vs Goblin!");
+
+        
+        boolean inventoryFrame = false;
+
+//        PlayerPanel humanAsset = new PlayerPanel(humanPath,40,40,20,20);
+//        PlayerPanel goblinAsset = new PlayerPanel(goblinPath,80,80,20,20);
+//        ImagePanel goblinAsset = new ImagePanel(100,100,40,40,"assets/goblin.jpeg");
+
+
         System.out.println("Stop");
 
 
         int cellSize = 40;
         int unitLength = 20;
 
+        
         Grid grid = new Grid(cellSize, unitLength, players, grassPath);
 
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -80,12 +97,26 @@ public class HumanvsGoblin {
 
         grid.setFocusable(true);
         grid.requestFocusInWindow();
+
         window.setVisible(true);
         window.setSize(900,900);
 
         boolean humanT = true;
 
         boolean ch = false;
+        Thread frame = new Thread(()-> {
+           try {
+               while (!grid.moveHandler.getInventory()) {
+                   window.repaint();
+                   Thread.sleep(100);
+               }
+           } catch(Exception e) {
+               System.out.println(e);
+           }
+       }
+
+       );
+       frame.start();
         int goblinWait = 200;
         int humanWait = 10;
         while (true) {
@@ -200,6 +231,5 @@ public class HumanvsGoblin {
             grid.repaint();
                  humanT = !humanT;
              }
-
     }
 }
