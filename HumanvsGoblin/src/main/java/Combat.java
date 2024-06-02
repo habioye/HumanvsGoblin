@@ -5,8 +5,6 @@ import java.awt.event.ActionListener;
 import javax.swing.*;
 
 public class Combat {
-    static JFrame f;
-    static JLabel l;
     static JFrame window;
     Container con;
     JPanel titleNamePanel, goblinHPPanel,PlayerHPPanel, goblinPanel, fightPanel, invetoryPanel, inspectPanel;
@@ -30,7 +28,7 @@ public class Combat {
     public Combat(){
 
         window = new JFrame();
-        window.setSize(800,600);
+        window.setSize(1000,800);
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         window.getContentPane().setBackground(Color.black);
         window.setLayout(null);
@@ -40,9 +38,9 @@ public class Combat {
         goblinHPPanel.setBounds(50,50,150,30);
         goblinHPPanel.setBackground(Color.BLACK);
         window.getContentPane().add(goblinHPPanel);
-        con.add(goblinHPPanel);
+        window.add(goblinHPPanel);
 
-        GoblinHealthBar = new JProgressBar(0,20);
+        GoblinHealthBar = new JProgressBar(0,gobby.getMaxHealth());
         GoblinHealthBar.setPreferredSize(new Dimension(150,30));
         //Set HP goblin value
         GoblinHealthBar.setValue(gobby.currentHP);
@@ -54,13 +52,12 @@ public class Combat {
         ImageIcon goblin = new ImageIcon("HumanvsGoblin/src/main/java/assets/pngtree-goblin-cartoon-png-image_4008070.jpeg","Goblin image");
         goblin.getImage();
 
-        goblinLabel = new JLabel(goblin);
+        goblinLabel = new JLabel(gobby.getIcon());
         window.add(goblinLabel);
 
         ImageIcon humanIcon = new ImageIcon("C:/Users/Tman4/OneDrive/Pictures/amy mood.png");
         humanIcon.setImage(humanIcon.getImage());
         humanLabel = new JLabel(humanIcon);
-        //JOptionPane.showMessageDialog(humanLabel, "Gobby", "Gobby", Goblin.currentHP);
         window.add(humanLabel);
 
         PlayerHPPanel = new JPanel();
@@ -70,7 +67,7 @@ public class Combat {
 
         playerHealthBar = new JProgressBar(0,human.getHealth());
         playerHealthBar.setPreferredSize(new Dimension(150,30));
-        playerHealthBar.setValue(human.getHealth());
+        playerHealthBar.setValue(human.currentHP);
         playerHealthBar.setStringPainted(true);
         playerHealthBar.setString("Player HP: "+playerHealthBar.getValue());
         PlayerHPPanel.add(playerHealthBar);
@@ -97,7 +94,7 @@ public class Combat {
             }
         });
         fightPanel = new JPanel();
-        fightPanel.setBounds(100,450,150,30);
+        fightPanel.setBounds(0,450,150,35);
         fightPanel.setBackground(Color.black);
         fightPanel.add(fightButton);
         window.add(fightPanel);
@@ -112,7 +109,7 @@ public class Combat {
             }
         });
         invetoryPanel = new JPanel();
-        invetoryPanel.setBounds(100, 475,150,30);
+        invetoryPanel.setBounds(100, 450,140,50);
         invetoryPanel.setBackground(Color.black);
         invetoryPanel.add(inventoryButton);
         window.add(invetoryPanel);
@@ -128,7 +125,7 @@ public class Combat {
             }
         });
         inspectPanel = new JPanel();
-        inspectPanel.setBounds(200,450,150,30);
+        inspectPanel.setBounds(200,450,150,35);
         inspectPanel.setBackground(Color.black);
         inspectPanel.add(inspectButton);
         window.add(inspectPanel);
@@ -137,43 +134,47 @@ public class Combat {
     //method to start attacking goblin
     public static void attack(){
         int playerDamage = (human.getAttack()-gobby.getDefense());
-        gobby.damageTaken(playerDamage);
-        if(gobby.isDead()){
-            JOptionPane.showMessageDialog(null, "Goblin has been slain", "Victory", 0);
+        if(!(gobby.isDead()) && !(human.isDead())){
+            gobby.damageTaken(playerDamage);
+            if(gobby.isDead()){
+                JOptionPane.showMessageDialog(null, "Goblin has been slain", "Victory", 0);
+            }
+            int goblinDamage = (gobby.getAttack()-human.getDefense());
+            human.damageTaken(goblinDamage);
+            if(human.isDead()){
+                JOptionPane.showMessageDialog(null, "You have been slain", "Death", 0);
+            }
+        } else{
             window.setVisible(false);
             window.dispose();
         }
-        int goblinDamage = (gobby.getAttack()-human.getDefense());
-        human.damageTaken(goblinDamage);
-        if(human.isDead()){
-            JOptionPane.showMessageDialog(null, "You have been slain", "Death", 0);
-            window.setVisible(false);
-            window.dispose();
-        }
-        
         
     }
     //method to check goblin stats
     public void inspect(){
         JOptionPane.showMessageDialog(null, gobby.inspect(), "Inspect", 0);
-        //gobby.inspect();
     }
     //method to check current inventory and equip a new item
     public void inventory(){
         int attackValue=0;
         String itemName="";
-        Object[] options = bag.backpack.toArray();
-        int choice = JOptionPane.showOptionDialog(null,"Select item from inventory","Inventory",JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE, null, options, null);
-        if(bag.backpack.get(choice-1).getItemId().equals(Item.ItemID.SWORD)){
-            attackValue = bag.backpack.get(choice-1).getAttack();
-            itemName = bag.backpack.get(choice-1).getName();
+        Object[]itemList = new Object[bag.backpack.size()];
+        for(int i=0;i<itemList.length;i++){
+            itemList[i]=bag.backpack.get(i).getName();            
         }
-        if(bag.backpack.get(choice-1).getItemId().equals(Item.ItemID.GOLD)){
-            attackValue = bag.backpack.get(choice-1).getAttack();
-            itemName = bag.backpack.get(choice-1).getName();
+        //shows a window to select item in inventory
+        int choice = JOptionPane.showOptionDialog(null,"Select item from inventory","Inventory",JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE, null, itemList, null);
+        if(bag.backpack.get(choice).getItemId().equals(Item.ItemID.SWORD)){
+            attackValue = bag.backpack.get(choice).getAttack();
+            itemName = bag.backpack.get(choice).getName();
         }
+        if(bag.backpack.get(choice).getItemId().equals(Item.ItemID.GOLD)){
+            attackValue = bag.backpack.get(choice).getAttack();
+            itemName = bag.backpack.get(choice).getName();
+        }
+        // show item change and any added on attack values
         JOptionPane.showMessageDialog(null, itemName+" has been selected. "+attackValue+" attack added. ", "Item Equipped", 0);
-        human.setAttck(attackValue);
+        human.setAttack(attackValue);
     }
     public static void main(String[] args){
         new Combat();
