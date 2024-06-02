@@ -140,6 +140,37 @@ public class HumanvsGoblin {
             }
             if (humanx == goblinx && humany == gobliny) {
                 System.out.println("They are in the same square! You can start the battle!!!!!");
+                window.setVisible(false);
+                Combat.gobby = new Goblin();
+                Combat.human = new Player();
+
+                Combat combat = new Combat();
+                int checkInterval = 10;
+                while (true) {
+                    try {
+                        Thread.sleep(checkInterval);
+                        if (combat.gobby.isDead()) {
+                            System.out.println("You have killed the goblin");
+                         break;
+                        }
+                        if (combat.human.isDead()) {
+                            System.out.println("You have been killed");
+                        }
+                    } catch (Exception e) {
+                        System.out.println(e.getMessage());
+                    }
+                }
+                if (combat.gobby.isDead()) {
+                    goblinx = 4;
+                    gobliny = 5;
+                }
+                if (combat.human.isDead()) {
+                    System.out.println("You have been killed");
+                    return;
+                }
+                combat.window.setVisible(false);
+                window.setVisible(true);
+
 
 
             }
