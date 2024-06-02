@@ -32,17 +32,35 @@ public class HumanvsGoblin {
         String fireHydrantPath = "assets/firehydrant.jpeg";
         String cratePath = "assets/crate.jpeg";
 
+        ArrayList<int[]> free = new ArrayList<>();
+        for (int i  = 0; i < 20; i++) {
+            for (int j  = 0; j < 20; j++) {
+                int[] curr = new int[2];
+                curr[0]= i;
+                curr[1] = j;
+                free.add(curr);
 
-        int humanx = 0;
-        int humany = 0;
+            }
+        }
+        Iterator<int[]> it = free.iterator();
+        int[] humanArr = it.next();
+        int humanx = humanArr[0];
+        int humany = humanArr[1];
 
-        int goblinx = 14;
-        int gobliny = 17;
+        int[] goblinArr = it.next();
+        int goblinx = goblinArr[0];
+        int gobliny = goblinArr[1];
+
+//        int humanx = 0;
+//        int humany = 0;
+//
+//        int goblinx = 14;
+//        int gobliny = 17;
 
 
-        PlayerAsset humanPlayer = new PlayerAsset(playerpos(humanx), playerpos(humany), 40, 40, humanPath);
-        PlayerAsset goblinPlayer = new PlayerAsset(playerpos(goblinx), playerpos(gobliny), 40, 40, goblinPath);
-        ArrayList<PlayerAsset> players = new ArrayList<>();
+        ModelAsset humanPlayer = new ModelAsset(playerpos(humanx), playerpos(humany), 40, 40, humanPath);
+        ModelAsset goblinPlayer = new ModelAsset(playerpos(goblinx), playerpos(gobliny), 40, 40, goblinPath);
+        ArrayList<ModelAsset> players = new ArrayList<>();
         players.add(humanPlayer);
         players.add(goblinPlayer);
 

@@ -8,14 +8,14 @@ import java.util.ArrayList;
 public class Grid extends JPanel {
     int gridsize;
     int units;
-    ArrayList<PlayerAsset> players;
+    ArrayList<ModelAsset> players;
     String path;
 
     //    String path;
     MoveHandler moveHandler;
     Image image;
 
-    public Grid(int gridsize, int units, ArrayList<PlayerAsset> players, String path) {
+    public Grid(int gridsize, int units, ArrayList<ModelAsset> players, String path) {
         setSize(900, 900);
         setVisible(true);
         this.gridsize = gridsize;
