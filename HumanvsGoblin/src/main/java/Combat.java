@@ -36,13 +36,13 @@ public class Combat extends JPanel{
         window.setSize(800, 600);
 
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        window.getContentPane().setBackground(Color.black);
+        window.getContentPane().setBackground(Color.green);
         window.setLayout(null);
         con = window.getContentPane();
 
         goblinHPPanel = new JPanel();
         goblinHPPanel.setBounds(50, 50, 150, 30);
-        goblinHPPanel.setBackground(Color.BLACK);
+        goblinHPPanel.setBackground(Color.white);
         window.getContentPane().add(goblinHPPanel);
         window.add(goblinHPPanel);
 
@@ -69,8 +69,8 @@ public class Combat extends JPanel{
         window.add(humanLabel);
 
         PlayerHPPanel = new JPanel();
-        PlayerHPPanel.setBounds(50, 500, 150, 30);
-        PlayerHPPanel.setBackground(Color.BLACK);
+        PlayerHPPanel.setBounds(50, 570, 150, 30);
+        PlayerHPPanel.setBackground(Color.white);
         window.add(PlayerHPPanel);
 
 
@@ -90,7 +90,7 @@ public class Combat extends JPanel{
         window.setVisible(true);
 
         fightButton = new JButton("Fight");
-        fightButton.setBackground(Color.WHITE);
+        fightButton.setBackground(Color.RED);
         fightButton.setForeground(Color.black);
         fightButton.setFocusPainted(false);
         fightButton.addActionListener(new ActionListener() {
@@ -106,12 +106,12 @@ public class Combat extends JPanel{
         fightPanel = new JPanel();
 
         fightPanel.setBounds(100, 450, 150, 30);
-        fightPanel.setBackground(Color.black);
+        fightPanel.setBackground(Color.white);
         fightPanel.add(fightButton);
         window.add(fightPanel);
 
         inventoryButton = new JButton("Inventory");
-        inventoryButton.setBackground(Color.WHITE);
+        inventoryButton.setBackground(Color.DARK_GRAY);
         inventoryButton.setForeground(Color.black);
         inventoryButton.setFocusPainted(false);
         inventoryButton.addActionListener(new ActionListener() {
@@ -123,13 +123,13 @@ public class Combat extends JPanel{
 
         invetoryPanel.setBounds(100, 475, 150, 30);
 
-        invetoryPanel.setBackground(Color.black);
+        invetoryPanel.setBackground(Color.white);
         invetoryPanel.add(inventoryButton);
         window.add(invetoryPanel);
 
 
         inspectButton = new JButton("Inspect");
-        inspectButton.setBackground(Color.WHITE);
+        inspectButton.setBackground(Color.LIGHT_GRAY);
         inspectButton.setForeground(Color.black);
         inspectButton.setFocusPainted(false);
         inspectButton.addActionListener(new ActionListener() {
@@ -139,15 +139,17 @@ public class Combat extends JPanel{
         });
         inspectPanel = new JPanel();
 
-        inspectPanel.setBounds(200, 450, 150, 30);
-        inspectPanel.setBackground(Color.black);
+        inspectPanel.setBounds(250, 450, 150, 30);
+        inspectPanel.setBackground(Color.white);
         inspectPanel.add(inspectButton);
         window.add(inspectPanel);
         window.setSize(900,900);
         
         // Create the player and the goblin panels
-        ModelAsset Player = new ModelAsset(40,40,100,100,"HumanvsGoblin\\HumanvsGoblin\\src\\main\\java\\assets\\human.png");
-        ModelAsset GobAsset = new ModelAsset(40, 400, 100, 100, "assets/goblin.png");
+        //ModelAsset Player = new ModelAsset(400,400,100,100,HumanvsGoblin.humanPath);
+        //ModelAsset GobAsset = new ModelAsset(400, 40, 150, 200, HumanvsGoblin.GoblinPath);
+        ModelAsset Player = new ModelAsset(400,400,200,200,"HumanvsGoblin\\HumanvsGoblin\\src\\main\\java\\assets\\human.png");
+        ModelAsset GobAsset = new ModelAsset(400, 40, 150, 200, "HumanvsGoblin\\HumanvsGoblin\\src\\main\\java\\assets\\goblin.png");
         ArrayList<ModelAsset> arr = new ArrayList<>();
         arr.add(GobAsset);
         arr.add(Player);
@@ -210,54 +212,5 @@ public class Combat extends JPanel{
         new Combat();
     }
 
-    public class CombatImages extends JPanel {
-    int gridsize;
-    int units;
-    ArrayList<ModelAsset> players;
-    String path;
-
-    //    String path;
-    MoveHandler moveHandler;
-    java.awt.Image image;
-
-    public CombatImages (ArrayList<ModelAsset> players) {
-        setSize(900, 900);
-        setVisible(true);
-        moveHandler = new MoveHandler();
-        loadImage(path);
-        this.players = players;
-
-
-        this.addKeyListener(moveHandler);
-
-    }
-
-    // Method to load the image
-    private void loadImage(String imagePath) {
-        ImageIcon imageIcon = new ImageIcon(imagePath);
-        this.image = imageIcon.getImage();
-    }
-
-    @Override
-    public Dimension getPreferredSize() {
-        return new Dimension((gridsize * units) + 100, (gridsize * units) + 100);
-    }
-
-
-    @Override
-    public void paintComponent(Graphics g) {
-        super.paintComponent(g);
-        loadImage(path);
-
-
-        for (int x = gridsize; x <= (gridsize * units); x += gridsize) {
-            for (int y = gridsize; y <= (gridsize * units); y += gridsize) {
-                g.drawImage(image, x, y, gridsize, gridsize, this);
-            }
-        }
-    }
-
-
-}
 
 }
