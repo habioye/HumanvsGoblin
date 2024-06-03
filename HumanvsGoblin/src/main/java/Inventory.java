@@ -15,13 +15,15 @@ public class Inventory extends JPanel implements ActionListener{
     Random random;
     Timer timer;
     boolean running = false;
-    final int[] cursor = new int[2];
+    final int[] cursor = new int[2]; //index 0 is the x for the cursor and 1 is the y for the cursor
 
     ArrayList<Item> backpack = HumanvsGoblin.human.getBackpack();
+    //hte row/col the cursor is on
     int currRow = 0;
     int currCol = 0;
+
+    //TEST
     JFrame inventoryFrame;
-    
     public void inventoryFrame(){
         inventoryFrame = new JFrame("Inventory");
         Inventory panel = new Inventory();
@@ -34,13 +36,12 @@ public class Inventory extends JPanel implements ActionListener{
     }
     
     public Inventory(){
+        //creates the basic jframe
         random = new Random();
         this.setPreferredSize(new Dimension(WIDTH/2,HEIGHT/2));
         this.setBackground(Color.black);
         this.setFocusable(true);
         this.addKeyListener(new MyKeyAdapter());
- 
-        HumanvsGoblin.human.setWeapon(0);
         play();
     }
 
@@ -52,6 +53,7 @@ public class Inventory extends JPanel implements ActionListener{
         drawStats(graphics2d);
 	}
     public void play(){
+        //creates the inventory cursor and starts the loop
         cursor[0] = WIDTH/2/2 +15;
         cursor[1] = 15;
         running = true;
@@ -59,7 +61,8 @@ public class Inventory extends JPanel implements ActionListener{
         timer.start();
         
     }
-    //create frames for the inventory and use the arrow keys to equip items
+    //creates slots for the inventory and use the arrow keys to pick the slots
+    //and enter to equip it
     public void drawInventory(Graphics2D graphics2d){
         graphics2d.setColor(new Color(0,0,0));
         graphics2d.fillRect(0, 0, WIDTH/2, HEIGHT/2);
@@ -71,17 +74,19 @@ public class Inventory extends JPanel implements ActionListener{
         int slotY = slotYStart;
         int slotSize = UNIT_SIZE - 20;
         graphics2d.setColor(Color.RED);
+        //prints out all the images of the items in the inventory
         for(int i = 0; i < backpack.size();i++){
             
             graphics2d.drawImage(backpack.get(i).image,slotX, slotY,35,35,null);
-
-            if (HumanvsGoblin.human.getWeapon() == i){
+            //if the item is the current weapon that is used then it will have a slight tint with it 
+            if (HumanvsGoblin.human.getWeapon() != -1 && HumanvsGoblin.human.getWeapon() == i){
                 graphics2d.setColor(new Color(135,206,250,100));  
                 graphics2d.fillRect(slotX, slotY, slotSize, slotSize);
                 
             }
+            //moves to the next slot
             slotX+= slotSize+20;
-
+            //goes to the next row if its at the end of the slot
             if(i == 2 ||i == 5 ||i == 8 ||i == 11 ||i == 14 ||i == 17){
                 slotX = slotXStart;
                 slotY += slotSize+20; 
@@ -92,11 +97,9 @@ public class Inventory extends JPanel implements ActionListener{
         graphics2d.setColor(Color.WHITE);
         graphics2d.setStroke(new BasicStroke(5));
         graphics2d.drawRoundRect(cursor[0], cursor[1], UNIT_SIZE, UNIT_SIZE,25,25);
-
-        
     }
     public void drawStats(Graphics2D graphics2d){
-
+        //creates the player stat
         graphics2d.setColor(new Color(255,255,255));
         graphics2d.setStroke(new BasicStroke(5));
         graphics2d.drawRoundRect(WIDTH/2/2+5, 5, WIDTH/2/2 -10, HEIGHT/2 -10,25,25);
@@ -109,29 +112,26 @@ public class Inventory extends JPanel implements ActionListener{
         graphics2d.setFont(new Font("Sans serif", Font.ROMAN_BASELINE, 20));
         graphics2d.drawString("Player Stats",10 ,graphics2d.getFont().getSize()+10);
         
-
-        if(backpack.size()>0){
-            graphics2d.drawString("Attack: "+ (backpack.get(HumanvsGoblin.human.getWeapon()).getAttack() + HumanvsGoblin.human.attack()), 10, graphics2d.getFont().getSize()*2+10);
+        if(HumanvsGoblin.human.getWeapon()!= -1){
+            graphics2d.drawString("Equiped: "+ backpack.get(HumanvsGoblin.human.getWeapon()).getName(), 10, graphics2d.getFont().getSize()*2+10);
+            graphics2d.drawString("Attack: "+ (backpack.get(HumanvsGoblin.human.getWeapon()).getAttack() + HumanvsGoblin.human.attack()), 10, graphics2d.getFont().getSize()*3+10);
         }else{
-            graphics2d.drawString("Attack: "+ HumanvsGoblin.human.attack(), 10, graphics2d.getFont().getSize()*2+10);
+            graphics2d.drawString("Equiped: Nothing", 10, graphics2d.getFont().getSize()*2+10);
+            graphics2d.drawString("Attack: "+ HumanvsGoblin.human.attack(), 10, graphics2d.getFont().getSize()*3+10);
         }
-        
-        graphics2d.drawString("Defense: "+HumanvsGoblin.human.defense(), 10, graphics2d.getFont().getSize()*3+10);
-        graphics2d.drawString("Equiped: "+ backpack.get(HumanvsGoblin.human.getWeapon()).getName(), 10, graphics2d.getFont().getSize()*4+10);
+        graphics2d.drawString("Defense: "+HumanvsGoblin.human.defense(), 10, graphics2d.getFont().getSize()*4+10);
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
         // TODO Auto-generated method stub
         repaint();
-        
-        
     }
     
     private class MyKeyAdapter extends KeyAdapter {
         @Override
         public void keyPressed(KeyEvent e) {
-            //Handle key pressed events
+            //Handle key pressed events for hte cursor
             switch (e.getKeyCode()) {
                 case KeyEvent.VK_LEFT:
                     //moves left
@@ -166,13 +166,16 @@ public class Inventory extends JPanel implements ActionListener{
                     
                     break;
                 
+
                 case KeyEvent.VK_ENTER:
+                    //changes the current weapon to the weapon the cursor is on
                     int index = (currRow*3)+(currCol);
                     HumanvsGoblin.human.setWeapon(index);
                     break;
 
             }
-            System.out.println(currCol+currRow);
+            //test
+            // System.out.println(currCol+currRow);
         }
     }
 }
