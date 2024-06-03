@@ -18,6 +18,10 @@ public class HumanvsGoblin{
     public static int gridWidth = 20;
     public static int gridHeight = 20;
 
+    // human and goblin paths
+    public static String humanPath = "assets/knight.png";
+    public static String GoblinPath = "assets/goblin.png";
+
     public static JFrame inventory = new JFrame();
 //         ImagePanel humanAsset = new ImagePanel(10,10,40,40,"assets/human.jpeg");
 //         ImagePanel goblinAsset = new ImagePanel(100,100,40,40,"assets/goblin.jpeg");
@@ -62,8 +66,7 @@ public class HumanvsGoblin{
         human.backpackAdd(new Gold());
 
 //        String humanPath = "assets/human.png";
-        String humanPath = "assets/knight.png";
-        String goblinPath = "assets/goblin.gif";
+
 
         // terrain
         String grassPath = "assets/grass.png";
