@@ -14,6 +14,10 @@ public class HumanvsGoblin{
     public static Player human = new Player();
     public Player goblin = new Player();
 
+    // grid dimensions
+    public static int gridWidth = 20;
+    public static int gridHeight = 20;
+
     public static JFrame inventory = new JFrame();
 //         ImagePanel humanAsset = new ImagePanel(10,10,40,40,"assets/human.jpeg");
 //         ImagePanel goblinAsset = new ImagePanel(100,100,40,40,"assets/goblin.jpeg");
@@ -23,13 +27,30 @@ public class HumanvsGoblin{
         return (40 + (p * 40));
     }
 
+    public static int[] randomPos(Set<int[]> arr) {
+        int posx;
+        int posy;
+        int[] coor = new int[2];
+        Random rand = new Random();
+        while (true) {
+            posx = rand.nextInt(gridWidth);
+            posy = rand.nextInt(gridHeight);
+            coor[0] = posx;
+            coor[1] = posy;
+            if (arr.contains(coor)) {
+                arr.remove(coor);
+                break;
+            }
+
+        }
+        return coor;
+    }
+
 
 
     public static void main(String[] args) {
 
-        // grid dimensions
-        int gridWidth = 20;
-        int gridHeight = 20;
+
 
 
 
@@ -52,9 +73,9 @@ public class HumanvsGoblin{
         String fireHydrantPath = "assets/firehydrant.jpeg";
         String cratePath = "assets/crate.jpeg";
 
-        ArrayList<int[]> free = new ArrayList<>();
-        for (int i  = 0; i < 20; i++) {
-            for (int j  = 0; j < 20; j++) {
+        Set<int[]> free = new HashSet<int[]>();
+        for (int i  = 0; i < gridHeight; i++) {
+            for (int j  = 0; j < gridWidth; j++) {
                 int[] curr = new int[2];
                 curr[0]= i;
                 curr[1] = j;
@@ -64,23 +85,21 @@ public class HumanvsGoblin{
         }
 //        Iterator<int[]> it = free.iterator();
         Random rand = new Random();
+        int[] coor = new int[2];
+
+
+
+
         // human position
-//        while (true) {
-//
-//        }
-        int[] humanArr = it.next();
-        int humanx = humanArr[0];
-        int humany = humanArr[1];
+        coor = randomPos(free);
+        int humanx = coor[0];
+        int humany = coor[1];
 
-        int[] goblinArr = it.next();
-        int goblinx = goblinArr[0];
-        int gobliny = goblinArr[1];
 
-//        int humanx = 0;
-//        int humany = 0;
-//
-//        int goblinx = 14;
-//        int gobliny = 17;
+        // goblin position
+        coor = randomPos(free);
+        int goblinx = coor[0];
+        int gobliny = coor[1];
 
 
         ModelAsset humanPlayer = new ModelAsset(playerpos(humanx), playerpos(humany), 40, 40, humanPath);
@@ -112,7 +131,7 @@ public class HumanvsGoblin{
 
 
         int cellSize = 40;
-        int unitLength = 20;
+        int unitLength = gridWidth;
 
         
         Grid grid = new Grid(cellSize, unitLength, players, grassPath);
