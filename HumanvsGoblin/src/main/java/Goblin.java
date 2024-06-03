@@ -6,12 +6,14 @@ public class Goblin {
     public static int def;
     public int gold;
     protected ImageIcon icon;
+    public static String path;
     public Goblin(){
         maxHP = (int)(Math.random()*4)+50;
         currentHP = maxHP;
         attack = 7;
         def = 5;
         icon = new ImageIcon("HumanvsGoblin/src/main/java/assets/pngtree-goblin-cartoon-png-image_4008070.jpeg");  
+        path = "HumanvsGoblin/HumanvsGoblin/src/main/java/assets/goblin.png";
     }
     public int getHealth(){
         return currentHP;

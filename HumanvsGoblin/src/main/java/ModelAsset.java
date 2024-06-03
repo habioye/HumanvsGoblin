@@ -14,6 +14,7 @@ class ModelAsset {
         this.path = path;
 
     }
+    
 
 
 }

@@ -1,10 +1,11 @@
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.*;
 
-public class Combat {
+public class Combat extends JPanel{
     static JFrame window;
     Container con;
     JPanel titleNamePanel, goblinHPPanel, PlayerHPPanel, goblinPanel, fightPanel, invetoryPanel, inspectPanel;
@@ -29,6 +30,7 @@ public class Combat {
     public Combat() {
 //        gobby = new Goblin();
 //        human = new Player();
+
         window = new JFrame();
 
         window.setSize(800, 600);
@@ -144,7 +146,14 @@ public class Combat {
         window.setSize(900,900);
         
         // Create the player and the goblin panels
-
+        ModelAsset Player = new ModelAsset(40,40,100,100,"HumanvsGoblin\\HumanvsGoblin\\src\\main\\java\\assets\\human.png");
+        ModelAsset GobAsset = new ModelAsset(40, 400, 100, 100, "assets/goblin.png");
+        ArrayList<ModelAsset> arr = new ArrayList<>();
+        arr.add(GobAsset);
+        arr.add(Player);
+        CombatImages cd = new CombatImages(arr);
+        window.add(cd);
+        window.setVisible(true);
         
 
     }
@@ -200,5 +209,55 @@ public class Combat {
 
         new Combat();
     }
+
+    public class CombatImages extends JPanel {
+    int gridsize;
+    int units;
+    ArrayList<ModelAsset> players;
+    String path;
+
+    //    String path;
+    MoveHandler moveHandler;
+    java.awt.Image image;
+
+    public CombatImages (ArrayList<ModelAsset> players) {
+        setSize(900, 900);
+        setVisible(true);
+        moveHandler = new MoveHandler();
+        loadImage(path);
+        this.players = players;
+
+
+        this.addKeyListener(moveHandler);
+
+    }
+
+    // Method to load the image
+    private void loadImage(String imagePath) {
+        ImageIcon imageIcon = new ImageIcon(imagePath);
+        this.image = imageIcon.getImage();
+    }
+
+    @Override
+    public Dimension getPreferredSize() {
+        return new Dimension((gridsize * units) + 100, (gridsize * units) + 100);
+    }
+
+
+    @Override
+    public void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        loadImage(path);
+
+
+        for (int x = gridsize; x <= (gridsize * units); x += gridsize) {
+            for (int y = gridsize; y <= (gridsize * units); y += gridsize) {
+                g.drawImage(image, x, y, gridsize, gridsize, this);
+            }
+        }
+    }
+
+
+}
 
 }
