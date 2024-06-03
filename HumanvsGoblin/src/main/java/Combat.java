@@ -8,9 +8,9 @@ import javax.swing.*;
 public class Combat extends JPanel{
     static JFrame window;
     Container con;
-    JPanel titleNamePanel, goblinHPPanel, PlayerHPPanel, goblinPanel, fightPanel, invetoryPanel, inspectPanel;
+    JPanel  goblinHPPanel, PlayerHPPanel, fightPanel, invetoryPanel, inspectPanel;
     JProgressBar GoblinHealthBar, playerHealthBar;
-    JLabel playerHealthLabel, goblinLabel, humanLabel;
+    JLabel playerHealthLabel;
     JButton fightButton, inventoryButton, inspectButton;
 
     static Goblin gobby = new Goblin();
@@ -28,15 +28,11 @@ public class Combat extends JPanel{
     }
 
     public Combat() {
-//        gobby = new Goblin();
-//        human = new Player();
-
+        //create jframe
         window = new JFrame();
-
         window.setSize(800, 600);
-
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        window.getContentPane().setBackground(Color.green);
+        window.getContentPane().setBackground(Color.black);
         window.setLayout(null);
         con = window.getContentPane();
 
@@ -47,41 +43,31 @@ public class Combat extends JPanel{
         window.add(goblinHPPanel);
 
 
-        GoblinHealthBar = new JProgressBar(0,gobby.getMaxHealth());
-        GoblinHealthBar.setPreferredSize(new Dimension(150,30));
 
         //Set HP goblin value
+        GoblinHealthBar = new JProgressBar(0,gobby.getMaxHealth());
+        GoblinHealthBar.setPreferredSize(new Dimension(150,30));
         GoblinHealthBar.setValue(gobby.currentHP);
         GoblinHealthBar.setBackground(Color.RED);
         GoblinHealthBar.setStringPainted(true);
         GoblinHealthBar.setString("Goblin HP: " + GoblinHealthBar.getValue());
         goblinHPPanel.add(GoblinHealthBar);
 
-        ImageIcon goblin = new ImageIcon("HumanvsGoblin/src/main/java/assets/pngtree-goblin-cartoon-png-image_4008070.jpeg", "Goblin image");
-        goblin.getImage();
-
-        goblinLabel = new JLabel(gobby.getIcon());
-        window.add(goblinLabel);
-
-        ImageIcon humanIcon = new ImageIcon("C:/Users/Tman4/OneDrive/Pictures/amy mood.png");
-        humanIcon.setImage(humanIcon.getImage());
-        humanLabel = new JLabel(humanIcon);
-        window.add(humanLabel);
-
+        //Create HP JPanel
         PlayerHPPanel = new JPanel();
         PlayerHPPanel.setBounds(50, 570, 150, 30);
         PlayerHPPanel.setBackground(Color.white);
         window.add(PlayerHPPanel);
 
-
+        //create a health progress bar that tracks player HP
         playerHealthBar = new JProgressBar(0, human.getHealth());
         playerHealthBar.setPreferredSize(new Dimension(150, 30));
         playerHealthBar.setValue(human.getHealth());
-
         playerHealthBar.setStringPainted(true);
         playerHealthBar.setString("Player HP: " + playerHealthBar.getValue());
         PlayerHPPanel.add(playerHealthBar);
 
+        //Label that stores health bar
         playerHealthLabel = new JLabel();
         playerHealthLabel.setPreferredSize(new Dimension(150, 30));
         playerHealthLabel.setText("Player Health");
@@ -89,10 +75,12 @@ public class Combat extends JPanel{
         PlayerHPPanel.add(playerHealthLabel);
         window.setVisible(true);
 
+        //Create fight button
         fightButton = new JButton("Fight");
         fightButton.setBackground(Color.RED);
         fightButton.setForeground(Color.black);
         fightButton.setFocusPainted(false);
+        //fight button function
         fightButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 attack();
@@ -103,13 +91,14 @@ public class Combat extends JPanel{
                 }
             }
         });
+        //add panel to frame
         fightPanel = new JPanel();
-
         fightPanel.setBounds(100, 450, 150, 30);
         fightPanel.setBackground(Color.white);
         fightPanel.add(fightButton);
         window.add(fightPanel);
 
+        //Create inventory button
         inventoryButton = new JButton("Inventory");
         inventoryButton.setBackground(Color.DARK_GRAY);
         inventoryButton.setForeground(Color.black);
@@ -119,15 +108,14 @@ public class Combat extends JPanel{
                 inventory();
             }
         });
+
+        //create panel for inventory
         invetoryPanel = new JPanel();
-
         invetoryPanel.setBounds(100, 475, 150, 30);
-
         invetoryPanel.setBackground(Color.white);
         invetoryPanel.add(inventoryButton);
         window.add(invetoryPanel);
-
-
+        //create inventory button
         inspectButton = new JButton("Inspect");
         inspectButton.setBackground(Color.LIGHT_GRAY);
         inspectButton.setForeground(Color.black);
@@ -137,19 +125,20 @@ public class Combat extends JPanel{
                 inspect();
             }
         });
-        inspectPanel = new JPanel();
 
+        //Create panel for inspect
+        inspectPanel = new JPanel();
         inspectPanel.setBounds(250, 450, 150, 30);
         inspectPanel.setBackground(Color.white);
         inspectPanel.add(inspectButton);
         window.add(inspectPanel);
         window.setSize(900,900);
         
-        // Create the player and the goblin panels
-        //ModelAsset Player = new ModelAsset(400,400,100,100,HumanvsGoblin.humanPath);
-        //ModelAsset GobAsset = new ModelAsset(400, 40, 150, 200, HumanvsGoblin.GoblinPath);
-        ModelAsset Player = new ModelAsset(400,400,200,200,"HumanvsGoblin\\HumanvsGoblin\\src\\main\\java\\assets\\human.png");
-        ModelAsset GobAsset = new ModelAsset(400, 40, 150, 200, "HumanvsGoblin\\HumanvsGoblin\\src\\main\\java\\assets\\goblin.png");
+        // Create the player and the goblin images
+        ModelAsset Player = new ModelAsset(400,400,100,100,HumanvsGoblin.humanPath);
+        ModelAsset GobAsset = new ModelAsset(400, 40, 150, 200, HumanvsGoblin.goblinPath);
+        //ModelAsset Player = new ModelAsset(400,400,200,200,"HumanvsGoblin\\HumanvsGoblin\\src\\main\\java\\assets\\human.png");
+        //ModelAsset GobAsset = new ModelAsset(400, 40, 150, 200, "HumanvsGoblin\\HumanvsGoblin\\src\\main\\java\\assets\\goblin.png");
         ArrayList<ModelAsset> arr = new ArrayList<>();
         arr.add(GobAsset);
         arr.add(Player);
@@ -181,7 +170,6 @@ public class Combat extends JPanel{
     }
     //method to check goblin stats
     public void inspect(){
-
         JOptionPane.showMessageDialog(null, gobby.inspect(), "Inspect", 0);
     }
 
@@ -207,10 +195,8 @@ public class Combat extends JPanel{
         JOptionPane.showMessageDialog(null, itemName+" has been selected. "+attackValue+" attack added. ", "Item Equipped", 0);
         human.setAttack(attackValue);
     }
+    //Begin Combat
     public static void main(String[] args){
-
         new Combat();
     }
-
-
 }

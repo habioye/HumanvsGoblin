@@ -15,6 +15,7 @@ public class CombatImages extends JPanel {
     public CombatImages (ArrayList<ModelAsset> players) {
         setSize(900, 900);
         setVisible(true);
+        setBackground(Color.DARK_GRAY);
         moveHandler = new MoveHandler();
         this.players = players;
 
