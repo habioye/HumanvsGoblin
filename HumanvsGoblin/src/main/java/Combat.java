@@ -135,8 +135,8 @@ public class Combat extends JPanel{
         window.setSize(900,900);
         
         // Create the player and the goblin images
-        ModelAsset Player = new ModelAsset(400,400,100,100,HumanvsGoblin.humanPath);
-        ModelAsset GobAsset = new ModelAsset(400, 40, 150, 200, HumanvsGoblin.goblinPath);
+        ModelAsset Player = new ModelAsset(400,400,100,100,HumanvsGoblin.stillHumanPath);
+        ModelAsset GobAsset = new ModelAsset(400, 40, 150, 200, HumanvsGoblin.stillGoblinPath);
         //ModelAsset Player = new ModelAsset(400,400,200,200,"HumanvsGoblin\\HumanvsGoblin\\src\\main\\java\\assets\\human.png");
         //ModelAsset GobAsset = new ModelAsset(400, 40, 150, 200, "HumanvsGoblin\\HumanvsGoblin\\src\\main\\java\\assets\\goblin.png");
         ArrayList<ModelAsset> arr = new ArrayList<>();
