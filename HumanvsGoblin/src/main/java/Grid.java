@@ -56,11 +56,12 @@ public class Grid extends JPanel {
         for (var player : players) {
             loadImage(player.path);
             g.setColor(Color.BLUE);
+            g.drawImage(image, player.x, player.y, player.width, player.height, this);
+            if (player.obstacle) continue;
             g.drawRect(player.x - 40, player.y, gridsize, gridsize); // left
             g.drawRect(player.x + 40, player.y, gridsize, gridsize); // right
             g.drawRect(player.x, player.y - 40, gridsize, gridsize); // top
             g.drawRect(player.x, player.y + 40, gridsize, gridsize); // bottom
-            g.drawImage(image, player.x, player.y, player.width, player.height, this);
 
         }
     }
