@@ -156,13 +156,16 @@ public class HumanvsGoblin {
         int gobliny = coor[1];
 
 
+        // human and goblin assets
         ModelAsset humanPlayer = new ModelAsset(playerpos(humanx), playerpos(humany), cellSize, cellSize, humanPath);
         ModelAsset goblinPlayer = new ModelAsset(playerpos(goblinx), playerpos(gobliny), cellSize, cellSize, goblinPath);
         models.add(humanPlayer);
         models.add(goblinPlayer);
 
-
+        // Main window JFrame
         JFrame window = new JFrame("Human vs Goblin!");
+
+        // Inventory Panel
         Inventory panel = new Inventory();
         inventory.add(panel);
         inventory.setTitle("Inventory");
@@ -171,15 +174,6 @@ public class HumanvsGoblin {
         inventory.pack();
         inventory.setLocationRelativeTo(null);
 
-
-//        boolean inventoryFrame = false;
-
-//        PlayerPanel humanAsset = new PlayerPanel(humanPath,40,40,20,20);
-//        PlayerPanel goblinAsset = new PlayerPanel(goblinPath,80,80,20,20);
-//        ImagePanel goblinAsset = new ImagePanel(100,100,40,40,"assets/goblin.jpeg");
-
-
-        System.out.println("Stop");
 
 
         int unitLength = gridWidth;
@@ -215,6 +209,8 @@ public class HumanvsGoblin {
         frame.start();
         int goblinWait = 200;
         int humanWait = 10;
+
+        // Implements the main game loop
         while (true) {
             ch = false;
             if (humanT) {
@@ -226,19 +222,15 @@ public class HumanvsGoblin {
                 }
 
                 if (grid.moveHandler.getLeft()) {
-
                     if (humanx == 0 || (free[humany][humanx - 1] == 1)) continue;
-                    System.out.println("Left IS MIGHT " + humanx + " " + goblinx);
                     humanx -= 1;
                     ch = true;
                 } else if (grid.moveHandler.getRight()) {
                     if (humanx == unitLength - 1 || (free[humany][humanx + 1] == 1)) continue;
-                    System.out.println("RIGHT IS MIGHT " + humanx + " " + goblinx);
                     humanx += 1;
                     ch = true;
 
                 } else if (grid.moveHandler.getUp()) {
-                    System.out.println("right");
                     if (humany == 0 || (free[humany - 1][humanx] == 1)) continue;
                     ch = true;
                     humany -= 1;
@@ -252,7 +244,6 @@ public class HumanvsGoblin {
                 }
 
             } else {
-                System.out.println("goblin");
                 try {
 
                     Thread.sleep(goblinWait);
@@ -280,7 +271,6 @@ public class HumanvsGoblin {
                         if (free[gobliny][goblinx] == 1) gobliny -= 1;
                     }
 
-                    System.out.println(goblinx + gobliny);
                 }
                 try {
 
@@ -320,12 +310,12 @@ public class HumanvsGoblin {
 
 
             }
-            System.out.println("moved");
             humanPlayer.x = playerpos(humanx);
             humanPlayer.y = playerpos(humany);
             goblinPlayer.x = playerpos(goblinx);
             goblinPlayer.y = playerpos(gobliny);
             grid.repaint();
+            // switches the turn
             humanT = !humanT;
         }
     }

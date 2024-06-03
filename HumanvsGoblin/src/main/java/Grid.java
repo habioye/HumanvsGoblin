@@ -15,6 +15,7 @@ public class Grid extends JPanel {
     MoveHandler moveHandler;
     Image image;
 
+    // Constructor
     public Grid(int gridsize, int units, ArrayList<ModelAsset> players, String path) {
         setSize(900, 900);
         setVisible(true);
@@ -36,12 +37,14 @@ public class Grid extends JPanel {
         this.image = imageIcon.getImage();
     }
 
+    // Changes the dimensions for the panel
     @Override
     public Dimension getPreferredSize() {
         return new Dimension((gridsize * units) + 100, (gridsize * units) + 100);
     }
 
 
+//    Draws the assets for the main grid such as: Grass, obstacles, player, goblin, etc.
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
