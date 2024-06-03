@@ -18,9 +18,9 @@ public class Player {
         maxHP = (int)(Math.random()*6)+30;
         currentHP = maxHP;
         currWeapon = -1;
-        attack = 10;
+        this.attack = 10;
         def = 3;
-        backpack = new ArrayList<Item>();
+        this.backpack = new ArrayList<Item>();
         icon = new ImageIcon("HumanvsGoblin/HumanvsGoblin/src/main/java/assets/human.jpeg");  
     }
     public int getHealth(){
@@ -72,7 +72,6 @@ public class Player {
         this.currWeapon = currWeapon;
     }
     public void setAttack(int newAttack) {
-		this.attack = attack;
         attack+=newAttack;
         
 	}
