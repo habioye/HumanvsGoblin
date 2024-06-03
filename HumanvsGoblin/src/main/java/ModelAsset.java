@@ -5,6 +5,7 @@ class ModelAsset {
     int x,y;
     int width, height;
     String path;
+    boolean obstacle;
 //    Image image;
     public ModelAsset(int x, int y, int width, int height, String path) {
         this.x = x;
@@ -12,6 +13,7 @@ class ModelAsset {
         this.width = width;
         this.height = height;
         this.path = path;
+        this.obstacle = false;
 
     }
     
