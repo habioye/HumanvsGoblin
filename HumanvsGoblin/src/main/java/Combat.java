@@ -38,7 +38,7 @@ public class Combat extends JPanel{
 
         goblinHPPanel = new JPanel();
         goblinHPPanel.setBounds(50, 50, 150, 30);
-        goblinHPPanel.setBackground(Color.white);
+        goblinHPPanel.setBackground(Color.darkGray);
         window.getContentPane().add(goblinHPPanel);
         window.add(goblinHPPanel);
 
@@ -56,7 +56,7 @@ public class Combat extends JPanel{
         //Create HP JPanel
         PlayerHPPanel = new JPanel();
         PlayerHPPanel.setBounds(50, 570, 150, 30);
-        PlayerHPPanel.setBackground(Color.white);
+        PlayerHPPanel.setBackground(Color.darkGray);
         window.add(PlayerHPPanel);
 
         //create a health progress bar that tracks player HP
@@ -94,13 +94,13 @@ public class Combat extends JPanel{
         //add panel to frame
         fightPanel = new JPanel();
         fightPanel.setBounds(100, 450, 150, 30);
-        fightPanel.setBackground(Color.white);
+        fightPanel.setBackground(Color.darkGray);
         fightPanel.add(fightButton);
         window.add(fightPanel);
 
         //Create inventory button
         inventoryButton = new JButton("Inventory");
-        inventoryButton.setBackground(Color.DARK_GRAY);
+        inventoryButton.setBackground(Color.ORANGE);
         inventoryButton.setForeground(Color.black);
         inventoryButton.setFocusPainted(false);
         inventoryButton.addActionListener(new ActionListener() {
@@ -112,7 +112,7 @@ public class Combat extends JPanel{
         //create panel for inventory
         invetoryPanel = new JPanel();
         invetoryPanel.setBounds(100, 475, 150, 30);
-        invetoryPanel.setBackground(Color.white);
+        invetoryPanel.setBackground(Color.darkGray);
         invetoryPanel.add(inventoryButton);
         window.add(invetoryPanel);
         //create inventory button
@@ -129,7 +129,7 @@ public class Combat extends JPanel{
         //Create panel for inspect
         inspectPanel = new JPanel();
         inspectPanel.setBounds(250, 450, 150, 30);
-        inspectPanel.setBackground(Color.white);
+        inspectPanel.setBackground(Color.darkGray);
         inspectPanel.add(inspectButton);
         window.add(inspectPanel);
         window.setSize(900,900);
