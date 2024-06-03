@@ -5,6 +5,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.lang.Thread;
 import java.util.*;
+import java.util.Random;
 
 //package PlayerAsset;
 
@@ -25,12 +26,20 @@ public class HumanvsGoblin{
 
 
     public static void main(String[] args) {
+
+        // grid dimensions
+        int gridWidth = 20;
+        int gridHeight = 20;
+
+
+
         human.backpackAdd(new sword());
         human.backpackAdd(new sword());
         human.backpackAdd(new sword());
         human.backpackAdd(new Gold());
         human.backpackAdd(new sword());
         human.backpackAdd(new Gold());
+
 //        String humanPath = "assets/human.png";
         String humanPath = "assets/knight.png";
         String goblinPath = "assets/goblin.gif";
@@ -53,7 +62,12 @@ public class HumanvsGoblin{
 
             }
         }
-        Iterator<int[]> it = free.iterator();
+//        Iterator<int[]> it = free.iterator();
+        Random rand = new Random();
+        // human position
+//        while (true) {
+//
+//        }
         int[] humanArr = it.next();
         int humanx = humanArr[0];
         int humany = humanArr[1];
