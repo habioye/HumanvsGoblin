@@ -16,7 +16,8 @@ public class Inventory extends JPanel implements ActionListener{
     Timer timer;
     boolean running = false;
     final int[] cursor = new int[2];
-    static ArrayList<Item> backpack = new ArrayList<Item>();
+
+    ArrayList<Item> backpack = HumanvsGoblin.human.getBackpack();
     int currRow = 0;
     int currCol = 0;
     JFrame inventoryFrame;
@@ -38,14 +39,7 @@ public class Inventory extends JPanel implements ActionListener{
         this.setBackground(Color.black);
         this.setFocusable(true);
         this.addKeyListener(new MyKeyAdapter());
-        
-        
-        backpack.add(new sword());
-        backpack.add(new sword());
-        backpack.add(new Gold());
-        backpack.add(new sword());
-        backpack.add(new Gold());
-        
+ 
         HumanvsGoblin.human.setWeapon(0);
         play();
     }
@@ -61,7 +55,7 @@ public class Inventory extends JPanel implements ActionListener{
         cursor[0] = WIDTH/2/2 +15;
         cursor[1] = 15;
         running = true;
-        timer = new Timer(0, this);
+        timer = new Timer(100, this);
         timer.start();
         
     }
@@ -78,14 +72,9 @@ public class Inventory extends JPanel implements ActionListener{
         int slotSize = UNIT_SIZE - 20;
         graphics2d.setColor(Color.RED);
         for(int i = 0; i < backpack.size();i++){
-            if(backpack.get(i).getItemId().equals(Item.ItemID.SWORD)){
-                graphics2d.drawImage(backpack.get(i).image,slotX, slotY,35,35,null);
+            
+            graphics2d.drawImage(backpack.get(i).image,slotX, slotY,35,35,null);
 
-            }else{
-                graphics2d.setColor(Color.YELLOW);
-                graphics2d.fillRect(slotX, slotY, slotSize, slotSize);
-                  
-            }
             if (HumanvsGoblin.human.getWeapon() == i){
                 graphics2d.setColor(new Color(135,206,250,100));  
                 graphics2d.fillRect(slotX, slotY, slotSize, slotSize);
@@ -120,13 +109,15 @@ public class Inventory extends JPanel implements ActionListener{
         graphics2d.setFont(new Font("Sans serif", Font.ROMAN_BASELINE, 20));
         graphics2d.drawString("Player Stats",10 ,graphics2d.getFont().getSize()+10);
         
+
         if(backpack.size()>0){
-            graphics2d.drawString("Attack: "+ backpack.get(HumanvsGoblin.human.getWeapon()).getAttack(), 10, graphics2d.getFont().getSize()*2+10);
+            graphics2d.drawString("Attack: "+ (backpack.get(HumanvsGoblin.human.getWeapon()).getAttack() + HumanvsGoblin.human.attack()), 10, graphics2d.getFont().getSize()*2+10);
         }else{
-            graphics2d.drawString("Attack: "+ 0, 10, graphics2d.getFont().getSize()*2+10);
+            graphics2d.drawString("Attack: "+ HumanvsGoblin.human.attack(), 10, graphics2d.getFont().getSize()*2+10);
         }
         
-        graphics2d.drawString("Defense: "+-12, 10, graphics2d.getFont().getSize()*3+10);
+        graphics2d.drawString("Defense: "+HumanvsGoblin.human.defense(), 10, graphics2d.getFont().getSize()*3+10);
+        graphics2d.drawString("Equiped: "+ backpack.get(HumanvsGoblin.human.getWeapon()).getName(), 10, graphics2d.getFont().getSize()*4+10);
     }
 
     @Override

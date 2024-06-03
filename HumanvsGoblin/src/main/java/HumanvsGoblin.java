@@ -18,8 +18,6 @@ public class HumanvsGoblin{
 //         ImagePanel goblinAsset = new ImagePanel(100,100,40,40,"assets/goblin.jpeg");
 
 
-
-
     public static int playerpos(int p) {
         return (40 + (p * 40));
     }
@@ -27,6 +25,12 @@ public class HumanvsGoblin{
 
 
     public static void main(String[] args) {
+        human.backpackAdd(new sword());
+        human.backpackAdd(new sword());
+        human.backpackAdd(new sword());
+        human.backpackAdd(new Gold());
+        human.backpackAdd(new sword());
+        human.backpackAdd(new Gold());
 //        String humanPath = "assets/human.png";
         String humanPath = "assets/knight.png";
         String goblinPath = "assets/goblin.gif";
@@ -81,7 +85,7 @@ public class HumanvsGoblin{
         inventory.setResizable(false);
         inventory.pack();
         inventory.setLocationRelativeTo(null);
-        Inventory.backpack.add(new sword());
+        
         
         boolean inventoryFrame = false;
 

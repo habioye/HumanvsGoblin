@@ -12,7 +12,7 @@ public class Player {
     public static int def;
     public int gold;
     public int currWeapon;
-    public static ArrayList<Item> backpack ;
+    public ArrayList<Item> backpack ;
     protected ImageIcon icon;
     public Player(){
         maxHP = (int)(Math.random()*6)+30;
@@ -53,6 +53,14 @@ public class Player {
     public int getAttack(){
         return (int)(Math.random() * 2) + attack;
     }
+     
+    public int attack(){
+        return attack;
+    }
+    
+    public int defense(){
+        return def;
+    }
     public String inspect(){
         return "Player:  "+"\nHP: "+currentHP+" / "+maxHP+"\n Attack: "+attack+" - " + (attack+1)+"\nDefense: "+def+" - "+(def+1);
     }
@@ -62,6 +70,12 @@ public class Player {
     }
     public void setWeapon(int currWeapon){
         this.currWeapon = currWeapon;
+    }
+    public ArrayList<Item> getBackpack() {
+        return this.backpack;
+    }
+    public void backpackAdd(Item item){
+        this.backpack.add(item);
     }
 
 
