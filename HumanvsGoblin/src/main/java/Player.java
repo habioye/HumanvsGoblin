@@ -12,15 +12,15 @@ public class Player {
     public static int def;
     public int gold;
     public int currWeapon;
-    public static ArrayList<Item> backpack ;
+    public ArrayList<Item> backpack ;
     protected ImageIcon icon;
     public Player(){
         maxHP = (int)(Math.random()*6)+30;
         currentHP = maxHP;
         currWeapon = -1;
-        attack = 10;
+        this.attack = 10;
         def = 3;
-        backpack = new ArrayList<Item>();
+        this.backpack = new ArrayList<Item>();
         icon = new ImageIcon("HumanvsGoblin/HumanvsGoblin/src/main/java/assets/human.jpeg");  
     }
     public int getHealth(){
@@ -53,6 +53,14 @@ public class Player {
     public int getAttack(){
         return (int)(Math.random() * 2) + attack;
     }
+     
+    public int attack(){
+        return attack;
+    }
+    
+    public int defense(){
+        return def;
+    }
     public String inspect(){
         return "Player:  "+"\nHP: "+currentHP+" / "+maxHP+"\n Attack: "+attack+" - " + (attack+1)+"\nDefense: "+def+" - "+(def+1);
     }
@@ -64,9 +72,15 @@ public class Player {
         this.currWeapon = currWeapon;
     }
     public void setAttack(int newAttack) {
-		this.attack = attack;
         attack+=newAttack;
         
 	}
+    public ArrayList<Item> getBackpack() {
+        return this.backpack;
+    }
+    public void backpackAdd(Item item){
+        this.backpack.add(item);
+    }
+
 
 }
